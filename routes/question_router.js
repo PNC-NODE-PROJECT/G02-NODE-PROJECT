@@ -28,20 +28,6 @@ router.post('/add', (req, res) => {
     }
 })
 
-// delete one quiz question
-router.delete('/deletes/:id',(req, res) => {
-    let deleteQuestion = exportModel.QuestionModel.findByIdAndDelete({_id:req.params.id})
-    if (deleteQuestion) {
-        res.status(200).send({
-            "message": 'Question deleted successfully'
-        })
-    } else {
-        res.status(404).send({
-            "message": 'Item id not found'
-        })
-    }
-})
-
 
 // update one quiz question
 router.put('/questions/:id', (req, res) => {
