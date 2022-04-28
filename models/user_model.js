@@ -20,6 +20,7 @@ const UserSchemar = new mongoose.Schema({
     last_name:{type:String, require:true},
     email:{type:String, require:true},
     password:{type:String, require:true},
+    cpassword: {type:String, require: true}
 })
 
 // TODO:   CREAT MODEL FOR USER SCHEMAR
