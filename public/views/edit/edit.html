@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- api -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>App quiz</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+    <!-- =============================================================================== -->
+    <!-- header menu -->
+    <div class="menu">
+        <div class="logo">
+            <img src="../../img/logo.png" alt="" width="15%" class="setlogo">
+        </div>
+       
+        <div class="login"><a href="#" class="setLogin">Login</a> </div>
+    </div>
+
+    <!-- =============================================================================== -->
+    <!-- contianer CreatForm -->
+    <div class="contianerForm">
+        <div class="cardForm">
+            <img src="../../img/back_icon.png" width="40px" alt="" class="imgBack" >
+            <!-- <div class="card-header"></div> -->
+            <div class="card-body">
+                <form action="#" class="setForm">
+                    <h3 class="addQuizTitle">
+                        <span class="setTextTitle">Title: <input type="text" id="getTitle" placeholder="Quiz title" class="inputTitle"> </span> 
+                        <!-- <span>Timer : <input type="text" id="gettimer" placeholder="time" class="settime"> </span> -->
+                    </h3>
+                    <div class="contentInput">
+                        <span class="putScore">Score: <input type="text" placeholder="Set score" id="getScore"></span>
+                        <div class="set-input">
+                            <input type="text" id="QuestionId" placeholder="Add Question">
+                        </div>
+                        <div class="set-input">
+                            <input type="text" placeholder="Answer" id="answer1Id">
+                            <input type="checkbox" name="check" id="A1">
+                        </div>
+                        <div class="set-input">
+                            <input type="text" placeholder="Answer" id="answer2Id">
+                            <input type="checkbox" name="check" id="A2">
+                        </div>
+                        <div class="set-input">
+                            <input type="text" placeholder="Answer" id="answer3Id">
+                            <input type="checkbox" name="check" id="A3">
+                        </div>
+                        <div class="set-input">
+                            <input type="text" placeholder="Answer" id="answer4Id">
+                            <input type="checkbox" name="check" id="A4">
+                        </div>
+                        <input type="button" value="Add+" class="btnAdd" id="btnAdd">
+                        
+                    </div> 
+                </form>
+            </div>
+        </div>
+            <!-- ============================================================================= -->
+            <!-- CONTIANER SHOW LIST QUESTION  -->
+            <div class="listQuestion">
+                <h2 class="titleQuiz hide"><span>Quiz: </span> <span id="subjectQuiz"> </span></h2>
+                <ul class="setListAdd" id="question_view">
+                    <!-- <li class="li-getquestion">
+                        <span class="getValue">QUESTION</span>
+                        <button class="btnInQuest">
+                            <img src="img/edit.png" alt="" class="editor">
+                            <img src="img/delete-icon.png" alt="" class="deleter">
+                            
+                        </button>
+                    </li> -->
+                    
+                </ul> 
+                <button type="submit" id="btnSaveId">SAVE</button>
+            </div>
+    </div>
+    <!-- link javascript -->
+    <script src="edit.js"></script>
+</body>
+</html>

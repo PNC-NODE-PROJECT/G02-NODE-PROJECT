@@ -1,9 +1,7 @@
 
-const { transcode } = require("buffer");
+
 const mongoose = require("mongoose");
-const {
-  v1: uuidv1
-} = require('uuid');
+
 // TODO: CONNECT TO MONGODB
 
 mongoose.connect(process.env.DATABASE,{useUnifiedTopology: true});
@@ -19,13 +17,12 @@ db.once("open", function () {
 const QuestionSchemar = new mongoose.Schema({
   
   title:{type:String, require:true},
-    question:[{
+    question:{
       description:{type:String, require:true},
       isCorrect:[{type:String,require:true}],
       answers:[{type:String, require:true}],
       score:{type:Number, require:true}
-    }
-  ],
+    },
 })
 
 

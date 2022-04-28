@@ -25,7 +25,7 @@ const userRouter = require("./routes/user_router")
 
 const quizRouter = require("./routes/quiz_router")
 
-app.use('/', questionRouter)
+app.use('/questions', questionRouter)
 
 app.use("/", userRouter)
 
