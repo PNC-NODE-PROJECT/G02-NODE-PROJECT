@@ -38,7 +38,15 @@ router.post('/add', (req, res) => {
 })
 
 // delete one quiz question
-
+router.delete('/delete/:id', (req, res) => {
+    exportModel.QuestionModel.deleteOne({ _id: req.params.id })
+    .then((result) => {
+        res.send("Question delete successfully");
+    })
+    .catch((error) => {
+        res.send(error)
+    })
+})
 
 // update one quiz question
 router.put('/update/:id', (req, res) => {

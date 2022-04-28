@@ -2,35 +2,46 @@
 
 const URL = "http://localhost:80"
 
-// TODO: request
+ // TODO: Request to the server to detele one task
 
-function refreshData(){
-    axios.get("/questions/get")
-    .then((result)=>{listQuestions(result.data)})
-    .catch((error)=>{console.log("You are error at", error)})
+function deleteData(question){
+    axios.delete(URL + "/questions/delete/" + question)
+    .catch((error)=>{console.log(error)})
+    refreshData()
 }
 
-refreshData()
-
+ // TODO: request question from server and add DOM
 
 function addData(postData){
-    console.log({title:postData.quiz, question:postData.ques});
     axios.post(URL + "/questions/add", {title:postData.quiz, question:postData.ques})
     .then((result)=>{console.log(result)})
     .catch((error)=>{console.log("My post is error at", error)})
     refreshData()
 }
 
+ // TODO: request tasks from server and update DOM
 
-//////////////// ADD QUESTION ////////////////////////
+function refreshData(){
+    axios.get("/questions/get")
+    .then((result)=>{listQuestions(result.data)})
+    .catch((error)=>{console.log("You are error at", error)})
+}
+refreshData()
+
+
+//////////////// show list question ////////////////////////
 function listQuestions(questions){
-    console.log("questions: ",questions);
+    while (dom_listQuestions.firstChild) {
+        dom_listQuestions.removeChild(dom_listQuestions.lastChild);
+      }
+    console.log("Get questions: ",questions);
     questions.forEach(element => {
         const li = document.createElement("li")
         li.className = "li-getquestion"
+        li.id = element._id
         const span = document.createElement("span")
         span.className = "getValue"
-        span.textContent= element.question.description
+        span.textContent = element.question.description
         li.appendChild(span)
         let btn=document.createElement("button")
         btn.className = "btnInQuest"
@@ -46,12 +57,12 @@ function listQuestions(questions){
         btn.appendChild(imgDelete)
         dom_listQuestions.appendChild(li)
     });
-    
 }
 
 
+// TODO: even function 
+
 function creatQuestionAndAnswers(){
-   
     let datas = {}
     let getAnswers=[]
     let isCorrectAnswer=[]
@@ -106,15 +117,26 @@ function creatQuestionAndAnswers(){
 
 
 
-// TODO: event button
-
-
-const btnAddQuestion = document.getElementById("btnAdd")
-btnAddQuestion.addEventListener("click", creatQuestionAndAnswers)
-
-
 
 
 // TODO: call paramater
 
 let dom_listQuestions = document.getElementById("question_view")
+const btnAddQuestion = document.getElementById("btnAdd")
+
+
+
+// TODO: event button
+
+// click add question
+btnAddQuestion.addEventListener("click", creatQuestionAndAnswers)
+
+// click delete question or update
+
+dom_listQuestions.addEventListener("click", (e)=>{
+    e.preventDefault()
+    if(e.target.className=="deleter"){
+        let question = e.target.parentElement.parentElement.id
+        deleteData(question)
+    }
+})
