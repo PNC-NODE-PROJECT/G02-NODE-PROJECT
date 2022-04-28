@@ -1,9 +1,9 @@
-
-require('dotenv').config()
-
 const express = require('express')
 const cors = require("cors")
 const app = express()
+
+require('dotenv').config()
+
 const PORT = process.env.PORT || 3000
 app.use(express.urlencoded({ extended : true }))
 app.use(express.json())
@@ -25,7 +25,7 @@ const userRouter = require("./routes/user_router")
 
 const quizRouter = require("./routes/quiz_router")
 
-app.use('/', questionRouter)
+app.use('/questions', questionRouter)
 
 app.use("/", userRouter)
 
