@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 
 // TODO: CONNECT TO MONGODB
@@ -21,7 +22,6 @@ const QuestionSchemar = new mongoose.Schema({
       answers:[{type:String, require:true}],
       score:{type:Number, require:true}
     }
-  
 })
 
 

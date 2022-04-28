@@ -13,6 +13,15 @@ router.get('/get', (req, res) => {
 })
 
 
+// get questions
+
+router.get('/get', (req, res) => {
+    exportModel.QuestionModel.find()
+    .then((result)=>{
+        console.log(result) ;
+        res.send(result)})
+})
+
 // create one quiz question
 
 router.post('/add', (req, res) => {
@@ -29,7 +38,15 @@ router.post('/add', (req, res) => {
 })
 
 // delete one quiz question
-
+router.delete('/delete/:id', (req, res) => {
+    exportModel.QuestionModel.deleteOne({ _id: req.params.id })
+    .then((result) => {
+        res.send("Question delete successfully");
+    })
+    .catch((error) => {
+        res.send(error)
+    })
+})
 
 // update one quiz question
 router.put('/update/:id', (req, res) => {
