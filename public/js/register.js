@@ -1,52 +1,33 @@
-function signup(e) {
+// function sign up
+function signUp(e) {
     e.preventDefault();
     let firstname = firstName.value;
     let lastname = lastName.value;
     let email = emailAddress.value;
     let password = pass.value;
-    let cofirm_password = cpassword.value;
-    // TODO: request the server to create new user
-    let URL = "http://localhost/users/create";
-    let body = {first_name: firstname, last_name: lastname, email: email, password: password, cpassword:cofirm_password};
-    axios.post(URL, body).then((result)=> {
-      console.log(result)
+    // request the server to create new user
+    let URL = "http://localhost/users/create"
+    let body = {first_name:firstname, last_name:lastname, email:email, password:password};
+    axios.post(URL, body).then((response)=> {
+      if(response) {
+        alert("create successfully")
+        location.reload();
+      }else {
+        alert("error")
+      }
+    }).catch((error)=> {
+      console.log(error)
     })
-  }
-// get login
-// app.get("/login" , (req, res)=> {
-//   res.send("login")
-// })
-
-// login check
-// app.post("/login", async (req, res)=> {
-//   try {
-//     const email = req.body.email;
-//     const password = req.body.password;
-//     const useremail = await Resgister.findOne({email:email});
-//     if(useremail.password == password) {
-//       res.status(201).render("index")
-//     }else {
-//       res.send("Your are not matching")
-//     }
-//   }catch (error) {
-//     res.status(400).send("invalid email")
-//   }
-// })
-
-
-// btn
-let loginBtn = document.querySelector("label.login");
-let signupBtn = document.querySelector("label.signup");
-
+}
+// main button get name form html
 let firstName = document.querySelector("#firstname");
 let lastName = document.querySelector("#lastname");
+let emailAddress = document.querySelector("#email");
+let pass = document.querySelector("#password");
+// button create user name
+let adduser = document.getElementById("submit");
+adduser.addEventListener("click", signUp);
 
-let emailAddress = document.getElementsByName("email");
-let pass = document.getElementsByName("password");
-let cpassword = document.getElementsByName("cofirmpassword");
-
-signupBtn.addEventListener("click", signup);
-loginBtn.addEventListener("click", isLoggedIn);
 
 
 

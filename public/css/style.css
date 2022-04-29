@@ -1,7 +1,5 @@
 /* LINK GOOGLE FONT */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-
-
 *{
     box-sizing: border-box;
     margin: 0;
@@ -694,22 +692,22 @@ footer button.show{
 }
 
 /* form login */
-
+/* 
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-}
-html,body{
+} */
+.containers{
   display: grid;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   place-items: center;
   /* background: -webkit-linear-gradient(left, #e8daea, #c3a3b0); */
   background: #343a40;
-}
+} 
 ::selection{
   background: #3f34bf;
   color: #fff;
