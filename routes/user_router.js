@@ -22,8 +22,16 @@ router.post('/create', (req, res) => {
 })
 
 // login check
-
-
-
+router.post("/login",(req, res) => {
+    let userdata = req.body;
+    let isvalid = false;
+    exportModel.UserModel.find(userdata)
+    .then((result) => {
+        if (result.length>0) {
+            isvalid = true;
+        }
+        res.send(isvalid);
+    });
+})
 // TODO: export router
 module.exports = router
