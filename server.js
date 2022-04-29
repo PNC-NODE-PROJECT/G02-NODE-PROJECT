@@ -29,4 +29,4 @@ app.use('/questions', questionRouter)
 
 app.use("/users", userRouter)
 
-app.use("/", quizRouter)
+app.use("/quizses", quizRouter)

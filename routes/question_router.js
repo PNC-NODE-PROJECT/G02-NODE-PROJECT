@@ -50,7 +50,8 @@ router.delete('/delete/:id', (req, res) => {
 
 // update one quiz question
 router.put('/update/:id', (req, res) => {
-    exportModel.QuestionModel.updateMany({_id : req.params.id}, {title: req.body.title, question: req.body.question, description: req.body.description, isCorrect: req.body.isCorrect, answers: req.body.answers})
+    
+    exportModel.QuestionModel.updateMany({_id : req.params.id}, {title:req.body.title, question:req.body.question, isCorrect:req.body.isCorrect, answers: req.body.answers, score:req.body.score})
     .then((result)=> {
         res.send("Question update successfully")
 

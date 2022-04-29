@@ -21,7 +21,7 @@
         <div class="logo">
             <img src="../../img/logo.png" alt="" width="15%" class="setlogo">
         </div>
-       
+        <div class="title_onmenu">SMART APP NODE-G02</div>
         <div class="login"><a href="#" class="setLogin">Login</a> </div>
     </div>
 
@@ -29,34 +29,35 @@
     <!-- contianer CreatForm -->
     <div class="contianerForm">
         <div class="cardForm">
-            <img src="../../img/back_icon.png" width="40px" alt="" class="imgBack" >
+            <!-- <img src="../../img/back_icon.png" width="40px" alt="" class="imgBack" > -->
             <!-- <div class="card-header"></div> -->
-            <div class="card-body">
+            <div class="card-body" id="goToupdate">
                 <form action="#" class="setForm">
                     <h3 class="addQuizTitle">
                         <span class="setTextTitle">Title: <input type="text" id="getTitle" placeholder="Quiz title" class="inputTitle"> </span> 
                         <!-- <span>Timer : <input type="text" id="gettimer" placeholder="time" class="settime"> </span> -->
                     </h3>
                     <div class="contentInput">
+                        <h1 class="h1-center">Create your question</h1>
                         <span class="putScore">Score: <input type="text" placeholder="Set score" id="getScore"></span>
                         <div class="set-input">
-                            <input type="text" id="QuestionId" placeholder="Add Question">
+                            <input type="text" id="QuestionId" placeholder="e.g What is your favorite?">
                         </div>
                         <div class="set-input">
-                            <input type="text" placeholder="Answer" id="answer1Id">
-                            <input type="checkbox" name="check" id="A1">
+                            <input type="text" placeholder="Option" id="answer">
+                            <input type="checkbox" name="check" id="correctAnswerId">
                         </div>
                         <div class="set-input">
-                            <input type="text" placeholder="Answer" id="answer2Id">
-                            <input type="checkbox" name="check" id="A2">
+                            <input type="text" placeholder="Option" id="answer">
+                            <input type="checkbox" name="check" id="correctAnswerId">
                         </div>
                         <div class="set-input">
-                            <input type="text" placeholder="Answer" id="answer3Id">
-                            <input type="checkbox" name="check" id="A3">
+                            <input type="text" placeholder="Option" id="answer">
+                            <input type="checkbox" name="check" id="correctAnswerId">
                         </div>
                         <div class="set-input">
-                            <input type="text" placeholder="Answer" id="answer4Id">
-                            <input type="checkbox" name="check" id="A4">
+                            <input type="text" placeholder="Option" id="answer">
+                            <input type="checkbox" name="check" id="correctAnswerId">
                         </div>
                         <input type="button" value="Add+" class="btnAdd" id="btnAdd">
                         
@@ -72,8 +73,8 @@
                     <!-- <li class="li-getquestion">
                         <span class="getValue">QUESTION</span>
                         <button class="btnInQuest">
-                            <img src="img/edit.png" alt="" class="editor">
-                            <img src="img/delete-icon.png" alt="" class="deleter">
+                            <a href="#goToupdate" class="editor">update<img src="../../img/edit.png" alt=""></a>
+                            <img src="../../img/delete-icon.png" alt="" class="deleter">
                         </button>
                     </li> -->
                     
