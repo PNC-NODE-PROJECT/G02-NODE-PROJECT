@@ -14,14 +14,11 @@ db.once("open", function () {
 });
 
 const QuestionSchemar = new mongoose.Schema({
-  
   title:{type:String, require:true},
-    question:{
-      description:{type:String, require:true},
-      isCorrect:[{type:String,require:true}],
-      answers:[{type:String, require:true}],
-      score:{type:Number, require:true}
-    }
+  question:{type:String, require:true},
+  isCorrect:[{type:String,require:true}],
+  answers:[{type:String, require:true}],
+  score:{type:Number, require:true}
 })
 
 
