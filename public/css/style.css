@@ -705,14 +705,7 @@ footer button.show{
 }
 
 /* form login */
-/* 
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-} */
+
 .containers{
   display: grid;
   height: 100vh;
@@ -888,4 +881,12 @@ form .btn input[type="submit"]{
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    margin-top: 15px;
+    font-size: 18px;
 }
