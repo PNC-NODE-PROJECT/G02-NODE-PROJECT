@@ -349,7 +349,7 @@ body{
     border-radius: 4px;
     padding:0 0.5rem;
     color: white;
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 .btnInQuest{
     background: #0464ca;
@@ -422,6 +422,7 @@ body{
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 .info_box .info-title{
@@ -473,6 +474,8 @@ body{
 }
 
 .quiz_box{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    margin-top: 3rem;
     width: 550px;
     background: #fff;
     border-radius: 5px;

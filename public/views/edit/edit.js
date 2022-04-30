@@ -2,21 +2,34 @@
 
 
 
-// TODO: call paramater
+// TODO: get URL api
+
 const URL = "http://localhost:80"
 
+//TODO: selecting all required elements
 
 let displayDomscreen = document.getElementById("dopDisplayOnscreen")
 const btnAddandUpdateQuestion = document.getElementById("btnAdd")
 let dom_CreateQuestion = document.querySelector(".contentInput")
 let DOMBODY=document.body
 
+//TODO: show and hide
+ 
+function hide(element){
+    element.style.display="none"
+}
+
+function show(element){
+    element.style.display="block"
+}
+
+
 function updateData(update){
     // TODO: Request to the server to update one task as completed
     let body = {title:update.quiz, question:update.question, isCorrect:update.isCorrect, answers:update.answers, score:update.score}
     axios.put(URL + "/questions/update/" + update.id,body)
     .catch((error)=>{console.log(error)})
-    displayQuestions()
+    requestServer()
 }
 
 
@@ -25,7 +38,7 @@ function updateData(update){
 function deleteData(question){
     axios.delete(URL + "/questions/delete/" + question)
     .catch((error)=>{console.log(error)})
-    displayQuestions()
+    requestServer()
 }
 
  // TODO: request question from server and add DOM
@@ -36,17 +49,17 @@ function addData(add){
     axios.post(URL + "/questions/add", body)
     .then((result)=>{console.log(result)})
     .catch((error)=>{console.log("My post is error at", error)})
-    displayQuestions()
+    requestServer()
 }
 
  // TODO: request from from server and update DOM
 
-function displayQuestions(){
+function requestServer(){
     axios.get("/questions/get")
     .then((result)=>{refreshDOM(result.data)})
     .catch((error)=>{console.log("You are error at", error)})
 }
-displayQuestions()
+requestServer()
 
 
 //////////////// show list question ////////////////////////
@@ -54,6 +67,7 @@ function refreshDOM(displayData){
     displayData = displayData.reverse()
     while (displayDomscreen.firstChild) {displayDomscreen.removeChild(displayDomscreen.lastChild)}
     displayData.forEach(element => {
+        let defualtScore = "0.0"
         const questionAndAnswersDom=document.createElement("div")
         questionAndAnswersDom.className = "setListAdd"
         const questionDOM = document.createElement("div")
@@ -61,7 +75,8 @@ function refreshDOM(displayData){
        questionDOM.id = element._id
         const span = document.createElement("span")
         span.className = "getValue"
-        span.textContent = element.question
+        if(element.score!=null){defualtScore = element.score}else{false}
+        span.textContent = "( "+ defualtScore +"pt ) "+ element.question
        questionDOM.appendChild(span)
         let btn=document.createElement("button")
         btn.className = "btnInQuest"
@@ -241,13 +256,11 @@ displayDomscreen.addEventListener("click", (e)=>{
 
 DOMBODY.addEventListener("click", (e)=>{
     if(e.target.className == "fas fa-chevron-circle-down"){
-        let hide = e.target.parentElement.parentElement.children[1]
-        hide.style.display="none"
+        hide(e.target.parentElement.parentElement.children[1])
         e.target.className = "fas fa-chevron-circle-up"
     }else if(e.target.className == "fas fa-chevron-circle-up"){
-        let hide = e.target.parentElement.parentElement.children[1]
-        displayCorrectAnswerIdDOM(hide)
-        hide.style.display="block"
+        show(e.target.parentElement.parentElement.children[1])
+        displayCorrectAnswerIdDOM(e.target.parentElement.parentElement.children[1])
         e.target.className ="fas fa-chevron-circle-down"
     }
 })
