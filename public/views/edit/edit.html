@@ -22,45 +22,44 @@
             <img src="../../img/logo.png" alt="" width="15%" class="setlogo">
         </div>
         <div class="title_onmenu">SMART APP NODE-G02</div>
-        <div class="login"><a href="#" class="setLogin">Login</a> </div>
+        <div class="login"><a href="http://localhost/" class="setLogin">Login</a> </div>
     </div>
 
     <!-- =============================================================================== -->
     <!-- contianer CreatForm -->
     <div class="contianerForm">
         <div class="cardForm">
-            <!-- <img src="../../img/back_icon.png" width="40px" alt="" class="imgBack" > -->
+            <a href="http://localhost/quizses.html"><img src="../../img/back_icon.png" width="40px" alt="" class="imgBack" ></a>
             <!-- <div class="card-header"></div> -->
-            <div class="card-body" id="goToupdate">
+            <div class="card-bodys" id="goToupdate">
                 <form action="#" class="setForm">
                     <h3 class="addQuizTitle">
-                        <span class="setTextTitle">Title: <input type="text" id="getTitle" placeholder="Quiz title" class="inputTitle"> </span> 
+                        <span class="setTextTitle">Title: <input type="text" id="getTitle" placeholder="Quiz title" class="inputTitle" required></span> 
                         <!-- <span>Timer : <input type="text" id="gettimer" placeholder="time" class="settime"> </span> -->
                     </h3>
                     <div class="contentInput">
                         <h1 class="h1-center">Create your question</h1>
-                        <span class="putScore">Score: <input type="text" placeholder="Set score" id="getScore"></span>
+                        <span class="putScore">Score: <input type="text" placeholder="Set score" id="getScore" required></span>
                         <div class="set-input">
-                            <input type="text" id="QuestionId" placeholder="e.g What is your favorite?">
+                            <input type="text" id="QuestionId" placeholder="Input your question.." required>
                         </div>
                         <div class="set-input">
-                            <input type="text" placeholder="Option" id="answer">
-                            <input type="checkbox" name="check" id="correctAnswerId">
+                            <input type="text" placeholder="Option" id="answer" name="answer1" required>
+                            <input type="checkbox" name="check" id="correctAnswerId" required>
                         </div>
                         <div class="set-input">
-                            <input type="text" placeholder="Option" id="answer">
-                            <input type="checkbox" name="check" id="correctAnswerId">
+                            <input type="text" placeholder="Option" id="answer" required>
+                            <input type="checkbox" name="check" id="correctAnswerId" required>
                         </div>
                         <div class="set-input">
-                            <input type="text" placeholder="Option" id="answer">
-                            <input type="checkbox" name="check" id="correctAnswerId">
+                            <input type="text" placeholder="Option" id="answer" required>
+                            <input type="checkbox" name="check" id="correctAnswerId" required>
                         </div>
                         <div class="set-input">
-                            <input type="text" placeholder="Option" id="answer">
-                            <input type="checkbox" name="check" id="correctAnswerId">
+                            <input type="text" placeholder="Option" id="answer" required>
+                            <input type="checkbox" name="check" id="correctAnswerId" required>
                         </div>
-                        <input type="button" value="Add+" class="btnAdd" id="btnAdd">
-                        
+                        <input type="submit" value="Add+" class="btnAdd" id="btnAdd">
                     </div> 
                 </form>
             </div>

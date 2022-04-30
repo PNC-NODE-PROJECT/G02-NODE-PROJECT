@@ -57,20 +57,6 @@
                 </div>
             </div>
         </div>
-        <script>
-            const loginText = document.querySelector(".title-text .login");
-            const loginForm = document.querySelector("form.login");
-            const loginBtn = document.querySelector("label.login");
-            const signupBtn = document.querySelector("label.signup");
-            signupBtn.onclick = (()=>{
-                loginForm.style.marginLeft = "-50%";
-                loginText.style.marginLeft = "-50%";
-            });
-            loginBtn.onclick = (()=>{
-                loginForm.style.marginLeft = "0%";
-                loginText.style.marginLeft = "0%";
-            });
-        </script>
     </div>
 <!-- =============================================================================== -->
     <!-- header menu -->
@@ -84,12 +70,12 @@
     <!-- =============================================================================== -->
     <!-- CONTIANER BODY -->
 
-    <div class="contianerApp">
+    <div class="contianerApp" style="display: none;">
         
         <div class="card">
             <div class="card-item">
                 <img src="img/quizicon.png" alt="" class="icon-img">
-                <a href="views/play/play.html"><button class="btn-ToQuiz btn-hover">Play Quiz</button></a>
+                <a href="quizses.html"><button class="btn-ToQuiz btn-hover">Play Quiz</button></a>
             </div>
             <div class="card-item">
                 <img src="img/iconcreate.png" alt="" class="icon-img">
@@ -98,7 +84,6 @@
         </div>
     </div>
     <!-- link javascript -->
-    <script src="js/register.js"></script>
-    <script src="js/login.js"></script>
+    <script src="js/mains.js"></script>
 </body>
 </html>

@@ -767,12 +767,12 @@ footer button.show{
 /* form login */
 
 .containers{
-  display: grid;
-  height: 100vh;
-  width: 100%;
-  place-items: center;
-  /* background: -webkit-linear-gradient(left, #e8daea, #c3a3b0); */
-  background: #343a40;
+    display: grid;
+    height: 100vh;
+    width: 100%;
+    place-items: center;
+    /* background: -webkit-linear-gradient(left, #e8daea, #c3a3b0); */
+    background: #343a40;
 } 
 ::selection{
   background: #3f34bf;
@@ -949,4 +949,37 @@ form .btn input[type="submit"]{
     border: none;
     margin-top: 15px;
     font-size: 18px;
+}
+
+/* quizses app */
+.cards {
+    width: 20%;
+    margin: 0 auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background: rgb(74, 143, 173);
+    height: 15vh;
+    border-radius: 9px;
+}
+.btngroup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: 0 auto; */
+}
+.card-body {
+    background-image: url(../img/bg.png);
+    color: #fff;
+    border-radius: 9px;
+}
+.card-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card-group {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 50%;
+    padding: 15px 12px 10px;
 }
