@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- api -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
     <title>App quiz</title>
     <link rel="stylesheet" href="../../css/style.css">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> -->
 </head>
 <body>
     <!-- =============================================================================== -->
@@ -32,36 +32,13 @@
             <a href="http://localhost/quizses.html"><img src="../../img/back_icon.png" width="40px" alt="" class="imgBack" ></a>
             <!-- <div class="card-header"></div> -->
             <div class="card-bodys" id="goToupdate">
-                <form action="#" class="setForm">
-                    <h3 class="addQuizTitle">
+                <!-- <form action="#" class="setForm"> -->
+                    <div class="addQuizTitle">
                         <span class="setTextTitle">Title: <input type="text" id="getTitle" placeholder="Quiz title" class="inputTitle" required></span> 
                         <!-- <span>Timer : <input type="text" id="gettimer" placeholder="time" class="settime"> </span> -->
-                    </h3>
-                    <div class="contentInput">
-                        <h1 class="h1-center">Create your question</h1>
-                        <span class="putScore">Score: <input type="text" placeholder="Set score" id="getScore" required></span>
-                        <div class="set-input">
-                            <input type="text" id="QuestionId" placeholder="Input your question.." required>
-                        </div>
-                        <div class="set-input">
-                            <input type="text" placeholder="Option" id="answer" name="answer1" required>
-                            <input type="checkbox" name="check" id="correctAnswerId" required>
-                        </div>
-                        <div class="set-input">
-                            <input type="text" placeholder="Option" id="answer" required>
-                            <input type="checkbox" name="check" id="correctAnswerId" required>
-                        </div>
-                        <div class="set-input">
-                            <input type="text" placeholder="Option" id="answer" required>
-                            <input type="checkbox" name="check" id="correctAnswerId" required>
-                        </div>
-                        <div class="set-input">
-                            <input type="text" placeholder="Option" id="answer" required>
-                            <input type="checkbox" name="check" id="correctAnswerId" required>
-                        </div>
-                        <input type="submit" value="Add+" class="btnAdd" id="btnAdd">
-                    </div> 
-                </form>
+                    </div>
+                    <div class="displayformCreateanswer"><button id="btn_displayDailog"> Add Question</button></div>
+                    <!-- Dialog of create question -->
             </div>
         </div>
             <!-- ============================================================================= -->
@@ -85,11 +62,69 @@
                         </div>  
                         <div class="clickDesplay"><i class='fas fa-chevron-circle-down'></i></div>
                     </div>  -->
-                </div>
-
-                <button type="submit" id="btnSaveId">SAVE</button>
+                </div>            
             </div>
     </div>
+    <!-- display form -->
+    <div class="displayDialog" id="hide">
+        <div class="contentInput">
+            <h1 class="h1-center">Create your question</h1>
+            <div class="putScore">Score: <input type="text" placeholder="Set score" id="getScore"></div>
+            <div class="set-input">
+                <input type="text" id="QuestionId" placeholder="Type question" required>
+            </div>
+            <div>Chose type your answers</div>
+
+            <div class="allTypeanswers">
+                <select name="selectType" id="choseTypeAnswers">
+                    <option value="No_Typeanswers">Type answer</option>
+                    <option value="Multiple">Multiple answers</option>
+                    <option value="ChoseOne">Option answer</option>
+                    <option value="TrueFalse">True or False</option>
+                </select>
+                <!-- true and false -->
+                    <div class="truefalseAnswer" id="hide">
+                        <label for="check"></label>
+                        <div class="set-input">
+                            <input type="text" placeholder="Option" id="answer" name="answer1" value="True" disabled>
+                            <input type="radio" name="check" id="correctAnswerId">
+                        </div>
+                        <div class="set-input">
+                            <input type="text" placeholder="Option" id="answer" name="answer1" value="False" disabled>
+                            <input type="radio" name="check" id="correctAnswerId">
+                        </div>
+                    </div>
+
+                    <!-- // multipleAnswer -->
+                    <div class="multipleAnswer" id="hide">
+                        <div class="set-input">
+                            <input type="text" placeholder="Type answer" id="answer" name="answer1" required>
+                            <button class="removeAnswer">remove</button>
+                            <input type="checkbox" name="check" id="correctAnswerId" required>
+                            
+                        </div>
+                    </div>
+
+                    <div class="optionAnswers" id="hide">
+                        <label for="check"></label>
+                        <div class="set-input">
+                            <input type="text" placeholder="Type answer" id="answer" name="answer1" required>
+                            <button class="removeAnswer">remove</button>
+                            <input type="radio" name="check" id="correctAnswerId">
+                        </div>
+
+                    </div>
+                    <!-- // ADD TYPE -->
+                    <div class="divAddoption"><button class="addoption" id="hide">Add Answer+</button></div>
+                    <!-- /// post -->
+ 
+                    <div class="postQuestion"><input type="submit" value="SAVE ANSWER" class="btn_PostData"></div>
+            </div>
+        </div> 
+    </div>
+
+
+
     <!-- link javascript -->
     <script src="edit.js"></script>
 </body>

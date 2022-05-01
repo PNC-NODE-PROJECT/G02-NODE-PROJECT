@@ -14,7 +14,7 @@ db.once("open", function () {
 });
 
 const QuestionSchemar = new mongoose.Schema({
-  title:{type:String, require:true},
+  quizId:{type: mongoose.Schema.Types.ObjectId, ref: "quizses"},
   question:{type:String, require:true},
   isCorrect:[{type:String,require:true}],
   answers:[{type:String, require:true}],

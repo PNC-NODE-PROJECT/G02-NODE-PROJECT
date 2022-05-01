@@ -22,6 +22,15 @@ router.get('/get', (req, res) => {
         res.send(result)})
 })
 
+// get question by id quiz
+
+router.get("/quiz/:id", (req, res)=>{
+    exportModel.QuestionModel.find({quizId:req.params.id})
+    .populate("quizId")
+    .then((result)=>{res.send("ok your result is", result)})
+})
+
+
 // create one quiz question
 
 router.post('/add', (req, res) => {

@@ -16,9 +16,8 @@ db.once("open", function () {
 // TODO:  DEFIN THE SCHEMAR FOR APP QUIZ COLLECTION
 
 const QuizSchemar = new mongoose.Schema({
-    quiz:{type:String, require:true},
-    questions:[{type: mongoose.Schema.Types.ObjectId, ref: "questions"}],
-    user:{type: mongoose.Schema.Types.ObjectId, ref: "users"},
+    title:{type:String, require:true},
+    userId:{type: mongoose.Schema.Types.ObjectId, ref: "users"},
   }) 
 
 // CREAT MODEL FOR APP QUIZ COLLECTION FROM SCHEMAR 

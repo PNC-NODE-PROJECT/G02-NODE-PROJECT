@@ -135,7 +135,8 @@ body{
     border-radius: 10px;
 
 }
-/* form create quiz */
+
+
 .setForm{
     padding: 10px;
     
@@ -144,6 +145,7 @@ body{
 }
 
 .addQuizTitle{
+    margin-bottom: 5px;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     font-size: larger;
     border-radius: 8px;
@@ -171,64 +173,118 @@ body{
     background-color: #f1f2f3;
 }
 
-.btnAdd{
-    margin-right: 2.5rem;
-    float: right;
-    padding: 10px 20px;
+.postQuestion {
+    margin-bottom: -3.5rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.btn_PostData{
+    /* margin-right: 2.5rem; */
+    padding: 10px 25px;
     border: none;
     color: white;
-    border-radius: 10px;
+    border-radius: 6px;
     background-color: rgb(1, 52, 221);
+    
+}
+
+/* form create quiz */
+.displayDialog{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 10;
+    display: flex;
+    align-items: center;
 }
 
 .contentInput{
+    /* margin-top: 4rem; */
+    width: 60%;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     padding: 30px 10px;
     padding-bottom: 4rem;
-    background-color: cornsilk;
+    background-color: white;
     border-radius: 10px;
-    margin: 1rem 0;
+    margin: 1rem auto;
     border-left: 3px solid rgb(6, 10, 223);
+    
 }
 .contentInput .h1-center{text-align: center;}
+
 .set-input{
+    background-color: white;
     width: 100%;
-    padding:4px 10px;
+    padding: 8px;
+    margin: 4px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 .set-input input[type="text"]{
-    width: 96%;
-    padding: 15px;
-    border-radius: 10px;
+    width: 100%;
+    padding: 0 10px;
     outline: none;
     border: none;
     font-size: large;
+    background-color: white;
+   
 }
 
-.set-input input[type="checkbox"]{
-    width: 3rem;
+.set-input input[type="checkbox"], input[type="radio"]{
+    transform: scale(1.5);
 }
+
+.allTypeanswers .removeAnswer{
+    /* padding: 8px; */
+    position: relative;
+    left: -1rem;
+    border: none;
+    background-color: white;
+    color: gray;
+    font-size: 1.2rem;
+}
+.removeAnswer:hover{
+    color: red;
+    text-decoration:wavy;
+}
+
+.divAddoption{
+    margin-top: 4px;
+    text-align: center;
+}
+
+.displayformCreateanswer{margin: 10px; text-align: end;}
+#btn_displayDailog{padding: 0.6rem;border: none;font-size: larger;border-radius: 4px;}
+
+#btn_displayDailog:hover{transform: scale(1.01); font-weight: bold;color: gray;}
 
 .putScore{
-    margin-right: -4.5rem;
+    /* margin-right: -4.5rem; */
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     font-weight: bolder;
     float: right;
 }
 
-.putScore input{
+.putScore >input{
     text-align: center;
     margin: 5px;
     width: 40%;
-    padding: 15px;
+    padding: 8px 15px;
     border-radius: 10px;
-    background-color: rgb(238, 234, 234);
+    /* background-color: rgb(238, 234, 234);
     border:  none;
-    outline: none;
+    outline: none; */
 }
 
 .listQuestion{
@@ -263,7 +319,6 @@ body{
 /* ///// diplay questions */
 
 #dopDisplayOnscreen{
-    
     border-radius: 10px;
 }
 
@@ -836,7 +891,7 @@ footer button.show{
   background: #007bff;
   transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
 }
-input[type="radio"]{
+.slide-controls input[type="radio"]{
   display: none;
 }
 #signup:checked ~ .slider-tab{

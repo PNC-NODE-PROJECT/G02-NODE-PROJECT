@@ -8,7 +8,7 @@ const exportModel = require('../models/quiz_model');
 // user router
 router.get('/quiz', (req, res) => {
     exportModel.QuizModel.find()
-    .populate("questions")
+    
     // .populate("user")
     .then((result)=>{
         console.log("result ", result) ;
