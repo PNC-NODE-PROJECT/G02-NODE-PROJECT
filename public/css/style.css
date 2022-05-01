@@ -13,12 +13,13 @@ body{
 
 .menu{
     background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-    padding: 1rem 4rem; 
+    /* padding: 1rem 4rem;  */
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
+    padding: 5;
 }
 
 
@@ -51,7 +52,7 @@ body{
     font-weight: bolder;
     font-size: 1.5rem;
 }
-.card{
+.cardapp{
     display: flex;
     justify-content: space-evenly;
     width: 50%;
@@ -774,7 +775,6 @@ footer button.show{
     height: 100vh;
     width: 100%;
     place-items: center;
-    /* background: -webkit-linear-gradient(left, #e8daea, #c3a3b0); */
     background: #343a40;
 } 
 ::selection{
@@ -836,7 +836,7 @@ footer button.show{
   background: #007bff;
   transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
 }
-input[type="radio"]{
+.slide-controls input[type="radio"]{
   display: none;
 }
 #signup:checked ~ .slider-tab{
@@ -878,16 +878,12 @@ input[type="radio"]{
   height: 100%;
   width: 100%;
   outline: none;
+  border: none;
   padding-left: 15px;
   border-radius: 5px;
-  border: 1px solid lightgrey;
   border-bottom-width: 2px;
   font-size: 17px;
   transition: all 0.3s ease;
-}
-.form-inner form .field input:focus{
-  border-color: #fc83bb;
-  /* box-shadow: inset 0 0 3px #fb6aae; */
 }
 .form-inner form .field input::placeholder{
   color: #999;
@@ -985,4 +981,39 @@ form .btn input[type="submit"]{
     margin: 0 auto;
     width: 50%;
     padding: 15px 12px 10px;
+}
+.field:hover{
+    border-color: #50a4f8;
+    border-radius: 5px;
+}
+
+.field{
+    box-sizing: border-box;
+    border: 1px solid lightgrey;
+}
+
+.input-field label, span.show{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.input-field label{
+    left: 15px;
+    pointer-events: none;
+    color: grey;
+    font-size: 18px;
+    transition: .4s;
+}
+.pswrd {
+    border: none;
+    outline: none;
+    position: relative;
+    padding: 10px 20px 10px;
+    margin: auto;
+}
+
+.fa-eye{
+    position: relative;
+    cursor: pointer;
+    margin: auto;
 }

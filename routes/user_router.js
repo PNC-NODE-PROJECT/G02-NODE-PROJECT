@@ -16,21 +16,22 @@ router.post('/create', (req, res) => {
     exportModel.UserModel.create(req.body)
     .then((result)=> {
         res.send(result)
-    }).catch((erorr)=> {
-        res.send(erorr)
     })
 })
-
 // login check
 router.post("/login",(req, res) => {
-    let userdata = req.body;
+    let useremail = req.body.email;
+    let userpasword = req.body.password;
     let isvalid = false;
-    exportModel.UserModel.find(userdata)
+    exportModel.UserModel.find({email:useremail, password:userpasword})
     .then((result) => {
         if (result.length>0) {
             isvalid = true;
         }
         res.send(isvalid);
+    })
+    .catch((error) => {
+        console.log(error)
     });
 })
 // TODO: export router

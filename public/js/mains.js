@@ -10,10 +10,10 @@ function signUp(e) {
   let body = {first_name:firstname, last_name:lastname, email:email, password:password};
   axios.post(URL, body).then((response)=> {
     if(response) {
-      alert("create successfully")
-      location.reload();
-    }else {
-      alert("error")
+        document.querySelector(".Correct").style.display = "block";
+        setTimeout(function(){
+          window.location.reload(1);
+      },2000);
     }
   }).catch((error)=> {
     console.log(error)
@@ -25,7 +25,7 @@ let lastName = document.querySelector("#lastname");
 let emailAddress = document.querySelector("#email");
 let pass = document.querySelector("#password");
 // button create user name
-let adduser = document.getElementById("submit");
+let adduser = document.querySelector("#btnsignin");
 adduser.addEventListener("click", signUp);
 
 //----------------- function login------------------------
@@ -38,19 +38,24 @@ function login(e){
   axios.post(url, body).then((response)=>{
       console.log(response);
       if(response.data){
-          document.querySelector(".containers").style.display = "none";
-          document.querySelector(".menu").style.display = "block";
-          document.querySelector(".contianerApp").style.display = "block";
-          alert("login successfully")
+          document.querySelector(".correct").style.display = "block";
+          setTimeout(function(){
+            document.querySelector(".containers").style.display = "none";
+            document.querySelector(".contianerApp").style.display = "block";
+            document.querySelector(".menus").style.display = "block";
+        }, 2000);
       }else{
-          alert("Email not valid")
+          document.querySelector(".incorrect").style.display = "block";
+          setTimeout(function(){
+            window.location.reload(1);
+         },2000);
       }
   })   
 }
 // main button get name from html 
 let uemail = document.querySelector("#loginemail");
 let upassword = document.querySelector("#loginpasword");
-let buttonlogin = document.querySelector("#btnsubmit");
+let buttonlogin = document.querySelector("#btnlogin");
 buttonlogin.addEventListener("click", login)
 
 //-----------------------function add questions-----------------------
@@ -64,14 +69,11 @@ function addData(e) {
     // request the server to create new user
     let URL = "http://localhost/questions/add"
     let body = {title:titlequestion, question:question, isCorrect:check, answers:answer, score:scores};
-    axios.post(URL, body).then((response)=> {
-      if(response) {
-        alert("create successfully")
-      }else {
-        alert("error")
-      }
+    axios.post(URL, body)
+    .then((response)=> {
+      console.log(response)
     }).catch((error)=> {
-      console.log(error)
+      console.log("eror")
     })
 }
 // main button get name form html
@@ -92,11 +94,45 @@ const signupBtn = document.querySelector("label.signup");
 signupBtn.onclick = (()=>{
     loginForm.style.marginLeft = "-50%";
     loginText.style.marginLeft = "-50%";
+    document.getElementById("eyInlogin").style.display="none"
 });
 loginBtn.onclick = (()=>{
     loginForm.style.marginLeft = "0%";
     loginText.style.marginLeft = "0%";
 });
 
+//----------------------functin show form login------------------------ 
+function showform() {
+  document.querySelector(".menus").style.display = "none";
+  document.querySelector(".contianerApp").style.display = "none";
+  document.querySelector(".correct").style.display = "none";
+  setTimeout(function(){
+    window.location.reload(1);
+  },1000); 
+}
+// manin button
+let btnshow = document.querySelector(".setLogin");
+btnshow.addEventListener("click", showform);
 
+//------------------function show index many quizses--------------------
+function showquizses() {
+  document.querySelector(".contianerApp").style.display = "none";
+  document.querySelector(".cotaninercards").style.display = "block";
+}
+// main button 
+let btnquiz = document.querySelector(".btnplay");
+btnquiz.addEventListener("click", showquizses);
 
+//---------------------function click back-------------------------------
+var input = document.querySelector('.pswrd');
+var show = document.querySelector('.fa-eye');
+show.addEventListener('click', active);
+function active(){
+  if(input.type === "password"){
+    input.type = "text";
+    show.style.color = "#1DA1F2";
+  }else{
+    input.type = "password";
+    show.style.color = "#111";
+  }
+}
