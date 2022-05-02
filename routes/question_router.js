@@ -12,22 +12,12 @@ router.get('/get', (req, res) => {
         res.send(result)})
 })
 
-
-// get questions
-
-router.get('/get', (req, res) => {
-    exportModel.QuestionModel.find()
-    .then((result)=>{
-        console.log(result) ;
-        res.send(result)})
-})
-
 // get question by id quiz
-
 router.get("/quiz/:id", (req, res)=>{
-    exportModel.QuestionModel.find({quizId:req.params.id})
+    console.log(req.params.id);
+    exportModel.QuestionModel.find({quizId: req.params.id})
     .populate("quizId")
-    .then((result)=>{res.send("ok your result is", result)})
+    .then((result)=>{ console.log(result); res.send(result)})
 })
 
 
@@ -59,7 +49,6 @@ router.delete('/delete/:id', (req, res) => {
 
 // update one quiz question
 router.put('/update/:id', (req, res) => {
-    
     exportModel.QuestionModel.updateMany({_id : req.params.id}, req.body)
     .then((result)=> {
         res.send("Question update successfully")

@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(cors({origin:"*"})); // To allow any origin
 
 app.listen(PORT, () => {
-    console.log('http://192.168.11.61:' + PORT)
+    console.log('http://localhost:' + PORT)
 })
 
 // Define static

@@ -1,61 +1,78 @@
 
+const URL = "http://localhost:80"
 
-let questions = [
-    {
+function requestFromServer(){
+    let id = JSON.parse(localStorage.getItem("QUIZ_ID"+JSON.parse(localStorage.getItem("USER_ID"))))
+    axios.get(URL + "/questions/quiz/"+id).then((respone)=>{
+        let questions = respone.data
+        localStorage.setItem("YOUR_QUIZ", JSON.stringify(questions))
+    })
+}
+
+let questions = JSON.parse(localStorage.getItem("YOUR_QUIZ"));
+
+requestFromServer()
+
+
+// let questions = [
+//     {
+//     question: "What does HTML stand for?",
+//     answer: ["Hyper Text Markup Language"],
+//     options: [
+//       "Hyper Text Preprocessor",
+//       "Hyper Text Markup Language",
+//       "Hyper Text Multiple Language",
+//       "Hyper Tool Multi Language",
+//       "Hyper Tool Multi Language",
+//       "Hyper Tool Multi Language"
+//     ],
+//     score:10
+//   },
+//     {
     
-    question: "What does HTML stand for?",
-    answer: ["Hyper Text Markup Language"],
-    options: [
-      "Hyper Text Preprocessor",
-      "Hyper Text Markup Language",
-      "Hyper Text Multiple Language",
-      "Hyper Tool Multi Language"
-    ],
-    score:10
-  },
-    {
+//     question: "What does CSS stand for?",
+//     answer:[ "Cascading Style Sheet"],  
+//     options: [
+//       "Cascading Style Sheet"
+//     ],
+//     score:10
+//   },
+//     {
     
-    question: "What does CSS stand for?",
-    answer:[ "Cascading Style Sheet"],  
-    options: [
-      "Cascading Style Sheet"
-    ],
-    score:10
-  },
-    {
+//     question: "What does PHP stand for?",
+//     answer:[ "Hypertext Preprocessor"],
+//     options: [
+//       "Hypertext Preprocessor",
+//       "Hypertext Programming",
+//       "Hypertext Preprogramming",
+//       "Hometext Preprocessor"
+//     ],
+//     score:10
+//   },
+//     {
     
-    question: "What does PHP stand for?",
-    answer:[ "Hypertext Preprocessor"],
-    options: [
-      "Hypertext Preprocessor",
-      "Hypertext Programming",
-      "Hypertext Preprogramming",
-      "Hometext Preprocessor"
-    ],
-    score:10
-  },
-    {
-    
-    question: "What does SQL stand for?",
-    answer:[ "Structured Query Language"],
-    options: [
+//     question: "What does SQL stand for?",
+//     answer:[ "Structured Query Language"],
+//     options: [
       
-      "Structured Query Language"
-    ],
-    score:10
-  },
-    {
+//       "Structured Query Language"
+//     ],
+//     score:10
+//   },
+//     {
     
-    question: "What does XML stand for?",
-    answer:[ "eXtensible Markup Language"],
-    options: [
-      "eXtensible Markup Language",
+//     question: "What does XML stand for?",
+//     answer:[ "eXtensible Markup Language"],
+//     options: [
+//       "eXtensible Markup Language",
       
-    ],
-    score:10
-  },
+//     ],
+//     score:10
+//   },
   
-];
+// ];
+
+
 //selecting all required elements
 const start_btn = document.querySelector(".start_btn button");
 const info_box = document.querySelector(".info_box");
@@ -74,6 +91,7 @@ const DOMBUTTON_BODY = document.body
 // if startQuiz button clicked
 start_btn.onclick = ()=>{
     info_box.classList.add("activeInfo"); //show info box
+    requestFromServer()
 }
 
 // if exitQuiz button clicked
@@ -83,6 +101,7 @@ exit_btn.onclick = ()=>{
 
 // if continueQuiz button clicked
 continue_btn.onclick = ()=>{
+   
     info_box.classList.remove("activeInfo"); //hide info box
     quiz_box.classList.add("activeQuiz"); //show quiz box
     showQuetions(0); //calling showQestions function
@@ -135,8 +154,8 @@ const next_btn = document.querySelector("footer .next_btn");
 const bottom_ques_counter = document.querySelector("footer .total_que");
 
 // if Next Que button clicked
+
 next_btn.onclick = ()=>{
- 
     if(que_count < questions.length - 1){ //if question count is less than total question length
         que_count++; //increment the que_count value
         que_numb++; //increment the que_numb value
@@ -157,19 +176,18 @@ next_btn.onclick = ()=>{
 
 // getting questions and options from array
 function showQuetions(index){
-    
     const questionDOM = document.querySelector(".que_text");
-    if(questions[index].answer.length == 1){
-        typeAnswers.innerHTML = "There is "+ questions[index].answer.length + " answer correct !!!"
-    }else{typeAnswers.innerHTML = "There are "+ questions[index].answer.length + " answers correct !!!"}
+    if(questions[index].isCorrect.length == 1){
+        typeAnswers.innerHTML = "There is "+ questions[index].isCorrect.length + " answer correct !!!"
+    }else{typeAnswers.innerHTML = "There are "+ questions[index].isCorrect.length + " answers correct !!!"}
 
 //creating a new span and div tag for question and option and passing the value using array index
     let dom_Question = '<span>'+ que_numb + ". " + questions[index].question + " (" + questions[index].score + 'pt )</span>';
-    let numOfAnswers = questions[index].options
+    let numOfAnswers = questions[index].answers
     let option_tag = ""
     for(A=0; A < numOfAnswers.length; A++){
-        option_tag += '<div class="option"><span>'+ questions[index].options[A] +'</span></div>'
-    }console.log("my option", option_tag);
+        option_tag += '<div class="option"><span>'+ questions[index].answers[A] +'</span></div>'
+    }
     
     questionDOM.innerHTML = dom_Question; //adding new span tag inside dom_Question
     answersDOM.innerHTML = option_tag; //adding new div tag inside option_tag
@@ -193,10 +211,9 @@ let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
 function optionSelected(answer){
     clickAnswers ++
     let userAns = answer.textContent; //getting user selected option
-    let correcAns = questions[que_count].answer; //getting correct answer from array
+    let correcAns = questions[que_count].isCorrect; //getting correct answer from array
     const allOptions = answersDOM.children.length; //getting all option items
     let outOfCorrect = 0;
-   
     for(correctanswer of correcAns){
         outOfCorrect++
         if(userAns == correctanswer){ //if user selected option is equal to array's correct answer
@@ -212,11 +229,10 @@ function optionSelected(answer){
                     answersDOM.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
                 }
             }
-            // if(score>0){score = score/correcAns.length}
+           
         }
     }
     
-
     // multiple choice of question
     if(clickAnswers == correcAns.length){
         clearInterval(counter); //clear counter
@@ -229,7 +245,6 @@ function optionSelected(answer){
         next_btn.classList.add("show"); //show the next button if user selected any option
     } 
 }
-
 
 function showResult(){
     info_box.classList.remove("activeInfo"); //hide info box
@@ -264,7 +279,7 @@ function startTimer(time){
             clearInterval(counter); //clear counter
             timeText.textContent = "Time Off"; //change the time text to time off
             const allOptions = answersDOM.children.length; //getting all option items
-            let correcAns = questions[que_count].answer; //getting correct answer from arra
+            let correcAns = questions[que_count].isCorrect; //getting correct answer from arra
             for(i=0; i < allOptions; i++){
                 for(correctanswer of correcAns){
                     if(answersDOM.children[i].textContent == correctanswer && !answersDOM.children[i].children[1]){ //if there is an option which is matched to an array answer
@@ -303,11 +318,3 @@ function queCounter(index){
     bottom_ques_counter.innerHTML = totalQueCounTag;  
 }
 
-
-// call button to check
-
-DOMBUTTON_BODY.addEventListener("click", (e)=>{
-    if(e.target.ClassName="option"){
-        console.log("document is", e.target);
-    }
-})

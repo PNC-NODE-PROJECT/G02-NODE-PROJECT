@@ -1,3 +1,15 @@
+
+// TODO: identify requirement 
+
+// main button get name form html
+let firstName = document.querySelector("#firstname");
+let lastName = document.querySelector("#lastname");
+let emailAddress = document.querySelector("#email");
+let pass = document.querySelector("#signinpassword");
+
+let DomOfQuizses = document.querySelector(".card-group")
+let adduser = document.querySelector("#btnsignin");
+
 //----------------function sign up-------------------------
 function signUp(e) {
   e.preventDefault();
@@ -19,27 +31,20 @@ function signUp(e) {
     console.log(error)
   })
 }
-// main button get name form html
-let firstName = document.querySelector("#firstname");
-let lastName = document.querySelector("#lastname");
-let emailAddress = document.querySelector("#email");
-let pass = document.querySelector("#password");
-// button create user name
-let adduser = document.querySelector("#btnsignin");
-adduser.addEventListener("click", signUp);
+
 
 //----------------- function login------------------------
 function login(e){
   e.preventDefault();
   let useremail = uemail.value;
-  let userpasword = upassword.value;
+  let userpassword = upassword.value;
   let url = "http://localhost/users/login";
-  let body = {email:useremail, password:userpasword};
+  let body = {email:useremail, password:userpassword};
   axios.post(url, body).then((response)=>{
-      console.log(response);
       if(response.data){
           document.querySelector(".correct").style.display = "block";
           setTimeout(function(){
+            getInforOfUser(userpassword)
             document.querySelector(".containers").style.display = "none";
             document.querySelector(".contianerApp").style.display = "block";
             document.querySelector(".menus").style.display = "block";
@@ -52,39 +57,31 @@ function login(e){
       }
   })   
 }
+
+function getInforOfUser(userpassword){
+  console.log("pssw", userpassword);
+  let url = "http://localhost:80/users/logined/";
+  axios.get(url + userpassword).then((respone)=>{
+    console.log("user information is", respone.data);
+    let userInfor = respone.data
+    for (user of userInfor){
+      localStorage.setItem("USER_ID", JSON.stringify(user._id))
+    }
+  })
+}
+
+
+
 // main button get name from html 
 let uemail = document.querySelector("#loginemail");
 let upassword = document.querySelector("#loginpasword");
 let buttonlogin = document.querySelector("#btnlogin");
 buttonlogin.addEventListener("click", login)
 
-//-----------------------function add questions-----------------------
-function addData(e) {
-    e.preventDefault();
-    let titlequestion = titleofquestion.value;
-    let question = questions.value;
-    let check = checkquestion.value;
-    let answer = answerofquestions.value;
-    let scores = totalscore.value
-    // request the server to create new user
-    let URL = "http://localhost/questions/add"
-    let body = {title:titlequestion, question:question, isCorrect:check, answers:answer, score:scores};
-    axios.post(URL, body)
-    .then((response)=> {
-      console.log(response)
-    }).catch((error)=> {
-      console.log("eror")
-    })
-}
-// main button get name form html
-let titleofquestion = document.querySelector("#getTitle");
-let questions = document.querySelector("#QuestionId");
-let checkquestion = document.querySelector("#answer");
-let answerofquestions = document.querySelector("#correctAnswerId");
-let totalscore = document.querySelector("#getScore");
-// button add value form html
-let addquestions = document.getElementById("btnAdd");
-adduser.addEventListener("click", addData);
+// //-----------------------function add questions-----------------------
+
+
+// adduser.addEventListener("click", addData);
 
 //------------------verirable display login and sign up---------------
 const loginText = document.querySelector(".title-text .login");
@@ -136,3 +133,44 @@ function active(){
     show.style.color = "#111";
   }
 }
+
+
+///// view topic of quiz
+
+function refreshDOMToViewTopic(quizses){
+  console.log("my quizses is", quizses);
+  while(DomOfQuizses.firstChild){DomOfQuizses.removeChild(DomOfQuizses.lastChild)}
+  quizses.forEach(element => {
+    let headBody = '<div class="card-body m-2"><div class="card-title mt-4"><h5>'+ element.title +'</h5></div>'
+    let partBody = '<div class="btngroup" id="'+ element._id +'"> <a href="views/play/play.html" class="btn btn-primary mr-2">Play Quiz</a> <a href="views/edit/edit.html" class="btn btn-primary ml-2">Edit Quiz</a></div>'
+    let footBody = "</div"
+    DomOfQuizses.insertAdjacentHTML("beforeend", headBody+partBody+footBody)
+  });
+}
+
+
+
+// TODO: request datas
+
+function requestQuizsesFromServer(){
+  axios.get("quizses/quiz").then((result)=>{
+    refreshDOMToViewTopic(result.data)
+  }).catch((error)=>console.log(error))
+}
+requestQuizsesFromServer()
+
+/// Dom of button
+document.body.addEventListener("click", (e)=>{
+  let URL = "http://localhost:80"
+  if(e.target.textContent == "Play Quiz"){
+    localStorage.setItem("QUIZ_ID"+JSON.parse(localStorage.getItem("USER_ID")), JSON.stringify(e.target.parentElement.id))
+  }if(e.target.textContent == "Edit Quiz" && e.target.className=="btn btn-primary ml-2"){
+    localStorage.setItem("EDIT_ID"+ JSON.parse(localStorage.getItem("USER_ID")), JSON.stringify(e.target.parentElement.id))
+  }if(e.target.textContent == "Create Quiz"){
+    localStorage.setItem("CREATE_ID"+JSON.parse(localStorage.getItem("USER_ID")), JSON.stringify("Empty"))
+  }
+})
+
+
+
+

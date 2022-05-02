@@ -37,14 +37,14 @@
                         <span class="setTextTitle">Title: <input type="text" id="getTitle" placeholder="Quiz title" class="inputTitle" required></span> 
                         <!-- <span>Timer : <input type="text" id="gettimer" placeholder="time" class="settime"> </span> -->
                     </div>
-                    <div class="displayformCreateanswer"><button id="btn_displayDailog"> Add Question</button></div>
+                    <div class="displayformCreateanswer"><button id="btn_displayDailog">Add Question</button></div>
                     <!-- Dialog of create question -->
             </div>
         </div>
             <!-- ============================================================================= -->
             <!-- CONTIANER SHOW LIST QUESTION  -->
             <div class="listQuestion">
-                <h2 class="titleQuiz hide"><span>Quiz: </span> <span id="subjectQuiz"> </span></h2>
+                <h2 class="titleQuiz"><span>Quiz: </span> <span id="subjectQuiz"> </span></h2>
                 <div id="dopDisplayOnscreen">
                     <!-- <div class="setListAdd" id="question_view">
                         <div class="li-getquestion">
@@ -78,12 +78,12 @@
             <div class="allTypeanswers">
                 <select name="selectType" id="choseTypeAnswers">
                     <option value="No_Typeanswers">Type answer</option>
-                    <option value="Multiple">Multiple answers</option>
-                    <option value="ChoseOne">Option answer</option>
-                    <option value="TrueFalse">True or False</option>
+                    <option value="Multiple">Multiple Choice</option>
+                    <option value="ChoseOne">Only Choice</option>
+                    <!-- <option value="TrueFalse">True or False</option> -->
                 </select>
                 <!-- true and false -->
-                    <div class="truefalseAnswer" id="hide">
+                    <!-- <div class="truefalseAnswer" id="hide">
                         <label for="check"></label>
                         <div class="set-input">
                             <input type="text" placeholder="Option" id="answer" name="answer1" value="True" disabled>
@@ -93,7 +93,7 @@
                             <input type="text" placeholder="Option" id="answer" name="answer1" value="False" disabled>
                             <input type="radio" name="check" id="correctAnswerId">
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- // multipleAnswer -->
                     <div class="multipleAnswer" id="hide">
@@ -101,7 +101,6 @@
                             <input type="text" placeholder="Type answer" id="answer" name="answer1" required>
                             <button class="removeAnswer">remove</button>
                             <input type="checkbox" name="check" id="correctAnswerId" required>
-                            
                         </div>
                     </div>
 
@@ -112,7 +111,6 @@
                             <button class="removeAnswer">remove</button>
                             <input type="radio" name="check" id="correctAnswerId">
                         </div>
-
                     </div>
                     <!-- // ADD TYPE -->
                     <div class="divAddoption"><button class="addoption" id="hide">Add Answer+</button></div>
@@ -127,6 +125,6 @@
 
     <!-- link javascript -->
     <script src="edit.js"></script>
-    <script src="../../js/mains.js"></script>
+    <!-- <script src="../../js/mains.js"></script> -->
 </body>
 </html>

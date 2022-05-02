@@ -1,7 +1,3 @@
-// URL FROM SERVER
-
-
-
 
 // TODO: get URL api
 
@@ -22,7 +18,7 @@ let displayDialogForm = document.querySelector(".displayDialog")
 let inputAnswerTag=""
 const DOMBODY=document.body
 let paraIdOfquestionToupdate = 0;
-
+let idOfquiz = 0
 
 //TODO: show and hide
  
@@ -34,13 +30,12 @@ function show(element){
     element.style.display="block"
 }
 
-
 function updateData(update){
     // TODO: Request to the server to update one task as completed
-    let body = {title:update.quiz, question:update.question, isCorrect:update.isCorrect, answers:update.answers, score:update.score}
+    let body = {question:update.question, isCorrect:update.isCorrect, answers:update.answers, score:update.score}
     axios.put(URL + "/questions/update/" + paraIdOfquestionToupdate,body)
     .catch((error)=>{console.log(error)})
-    requestServer()
+    requestData()
 }
 
 
@@ -49,40 +44,40 @@ function updateData(update){
 function deleteData(question){
     axios.delete(URL + "/questions/delete/" + question)
     .catch((error)=>{console.log(error)})
-    requestServer()
+    requestData()
 }
 
  // TODO: request question from server and add DOM
 
 function addData(add){
-    console.log("my quiz title is ", add.quiz);
-    let body = {title:add.quiz, question:add.question, isCorrect:add.isCorrect, answers:add.answers, score:add.score}
+    let id = JSON.parse(localStorage.getItem("EDIT_ID"+ JSON.parse(localStorage.getItem("USER_ID"))))
+    let body = {quizId:id, question:add.question, isCorrect:add.isCorrect, answers:add.answers, score:add.score}
     axios.post(URL + "/questions/add", body)
     .then((result)=>{console.log(result)})
     .catch((error)=>{console.log("My post is error at", error)})
-    requestServer()
+    requestData()
 }
-
-// function requestAddorUpdate(data){
-
-// }
 
  // TODO: request from from server and update DOM
 
-function requestServer(){
-    axios.get("/questions/get")
-    .then((result)=>{refreshDOM(result.data)})
+function requestData(){
+    let id = JSON.parse(localStorage.getItem("EDIT_ID"+ JSON.parse(localStorage.getItem("USER_ID"))))
+    axios.get(URL +"/questions/quiz/"+id)
+    .then((result)=>{refreshDOM(result.data); console.log("my data in", result.data);})
     .catch((error)=>{console.log("You are error at", error)})
 }
-requestServer()
 
+requestData()
 
 //////////////// show list question ////////////////////////
 function refreshDOM(displayData){
+    console.log("My data is: ", displayData);
     parameterButtonUpdateOrAdd="SAVE ANSWER"
     displayData = displayData.reverse()
     while (displayDomscreen.firstChild) {displayDomscreen.removeChild(displayDomscreen.lastChild)}
     displayData.forEach(element => {
+        document.getElementById("getTitle").value=element.quizId.title
+        document.getElementById("subjectQuiz").textContent=element.quizId.title
         let defualtScore = "0.0"
         const questionAndAnswersDom=document.createElement("div")
         questionAndAnswersDom.className = "setListAdd"
@@ -106,10 +101,7 @@ function refreshDOM(displayData){
         imgDelete.src="../../img/delete-icon.png"
         imgDelete.className="deleter"
         btn.appendChild(imgDelete)
-        if(element.title!=="undefined"){
-            document.getElementById("subjectQuiz").textContent = element.title
-        }
-        // create dom answers
+        
 
         const answersDom = document.createElement("div")
         answersDom.className = "answers_list";
@@ -139,7 +131,6 @@ function refreshDOM(displayData){
         questionAndAnswersDom.appendChild(dom_onHideAndShow)
         // append question and answer to display on screen
         displayDomscreen.appendChild(questionAndAnswersDom)
-     
     });
 }
 
@@ -148,6 +139,7 @@ function refreshDOM(displayData){
 
 function displayCorrectAnswerIdDOM(option){
     for (item of option.children){
+        console.log("My option is :", item);
         let iconTage = document.createElement("div")
         let icon = document.createElement("i")
         if(item.className=="option correct"){
@@ -156,13 +148,14 @@ function displayCorrectAnswerIdDOM(option){
             iconTage.appendChild(icon)
             
         }else{
-            console.log(item);
             item.className="option incorrect"
             iconTage.className ="icon cross"
             icon.className = "fas fa-times"
         }
-        iconTage.appendChild(icon)
-        item.appendChild(iconTage)
+        if(!item.children[1]){
+            iconTage.appendChild(icon)
+            item.appendChild(iconTage)
+        }
     }
 }
 
@@ -182,28 +175,13 @@ function getRequesToUpdateDataInDom(questionIdToupdate){
 
 function showDomToUpdateData(dataToupdate){
     // console.log("data to up date is", dataToupdate);
-    document.getElementById("getTitle").value = dataToupdate.title
     document.getElementById("getScore").value = dataToupdate.score
     document.getElementById("QuestionId").value = dataToupdate.question
+    removeOldElement()
     paraIdOfquestionToupdate = dataToupdate._id
     let typeOfAnswers = dataToupdate.answers
     let typeOfcorrect = dataToupdate.isCorrect
-    if(typeOfcorrect[0]=="True" || typeOfcorrect[0]=="False"){
-        let option = booleanAnswer.querySelectorAll("#answer")
-        let checkedOption = booleanAnswer.querySelectorAll("#correctAnswerId")
-        for (let index = 0; index < typeOfAnswers.length; index++) {
-            if(typeOfAnswers[index] == typeOfcorrect[0]){
-                checkedOption[index].checked=true
-                option.values=typeOfAnswers[index]
-            }else{
-                checkedOption[index].checked=false
-                option.values=typeOfAnswers[index]
-            }
-        }
-        show(booleanAnswer)
-    }
     if(typeOfcorrect.length>1){
-        
         for (let index = 0; index < typeOfAnswers.length; index++) {
             const element = typeOfAnswers[index]
             let goodAnswer = ""
@@ -212,6 +190,7 @@ function showDomToUpdateData(dataToupdate){
                 multipleAnswers.insertAdjacentHTML("beforeend", inputMultipleAnswerTag)  
         }
         show(multipleAnswers) 
+        document.getElementById("choseTypeAnswers").value ="Multiple"
     }else{
         
         inputOptionAnswerTag=""
@@ -225,13 +204,14 @@ function showDomToUpdateData(dataToupdate){
             answerOption.insertAdjacentHTML("beforeend", inputOptionAnswerTag)
         }
         show(answerOption)
+        document.getElementById("choseTypeAnswers").value ="ChoseOne"
     }
     document.querySelector(".displayDialog").style.display="flex"
 }
 
 function removeOldElement(){
     while (answerOption.firstChild) {answerOption.removeChild(answerOption.lastChild)}
-    while (booleanAnswer.firstChild) {booleanAnswer.removeChild(booleanAnswer.lastChild)}
+
     while (multipleAnswers.firstChild) {multipleAnswers.removeChild(multipleAnswers.lastChild)}
 }
 
@@ -246,7 +226,7 @@ function getDataFromDOM(typeInput){
     let dom_Answers = typeInput.querySelectorAll("#answer");
     let dom_CorrectAnswers = typeInput.querySelectorAll("#correctAnswerId");
     for(index = 0; index<dom_Answers.length; index++){
-        if(dom_Answers[index].value==""){
+        if(dom_Answers[index].value ==""){
             dom_Answers[index].parentElement.parentElement.remove()
         }
         getAnswers.push(dom_Answers[index].value)
@@ -262,8 +242,7 @@ function getDataFromDOM(typeInput){
     if(getAnswers.length > 0 && isCorrectAnswer.length > 0 && btn_Requestpostdata.value == "SAVE ANSWER"){
         addData(data)
     }if(parameterButtonUpdateOrAdd == "UPDATE"){
-        updateData(data)
-        console.log("data is post", data)
+        updateData(data)  
     }
     clearFormInput(typeInput)
     hide(displayDialogForm)
@@ -274,13 +253,9 @@ function getDataFromDOM(typeInput){
 function clearFormInput(typeInput){
     document.getElementById("getScore").value=""
     document.getElementById("QuestionId").value=""
-    typeInput.querySelectorAll("#answer").forEach(element => {
-        element.remove()
-    });
     typeInput.querySelectorAll("#correctAnswerId").forEach(element => {
         element.checked=false
     });
-    removeOldElement()
     btn_Requestpostdata.value="SAVE ANSWER"
 }
 
@@ -293,31 +268,23 @@ function displayTypeanswers(type){
         show(multipleAnswers)
         show(btnAddmultipleorOption)
         hide(answerOption)
-        hide(booleanAnswer)
        }else if(type =="ChoseOne"){
         show(answerOption)
         show(btnAddmultipleorOption)
         hide(multipleAnswers)
-        hide(booleanAnswer)
-       }else if(type =="TrueFalse"){
-        hide(answerOption)
-        hide(btnAddmultipleorOption)
-        hide(multipleAnswers)
-        show(booleanAnswer)
-    }else{
+       }else{
         hide(multipleAnswers)
         hide(btnAddmultipleorOption)
         hide(answerOption)
-        hide(booleanAnswer)
+        
     }
 }
 
 function addInputanswers(typeOfadd){
-    console.log("my type need to add is: ", typeOfadd.children[0].value);
     if(typeOfadd.children[0].value=="Multiple"){
         inputAnswerTag = ""
         inputAnswerTag = '<div class="set-input"> <input type="text" placeholder="Type answer" id="answer" name="answer1" required><button class="removeAnswer">remove</button> <input type="checkbox" name="check" id="correctAnswerId" required> </div>'
-        // multipleAnswers.innerHTML = inputAnswerTag
+   
         multipleAnswers.insertAdjacentHTML("beforeend", inputAnswerTag)
     }else if(typeOfadd.children[0].value=="ChoseOne"){
         inputAnswerTag=""
@@ -325,18 +292,12 @@ function addInputanswers(typeOfadd){
         answerOption.insertAdjacentHTML("beforeend", inputAnswerTag)
     }
 }
-
 function postTypeofQuestion(typeOfAnswers){
     if(typeOfAnswers.children[0].value=="Multiple"){
-        // let options = typeOfAnswers.children[2]
-        getDataFromDOM(typeOfAnswers.children[2])
-        // console.log("Multiple", options);
-    }else if(typeOfAnswers.children[0].value=="ChoseOne"){
-        getDataFromDOM(typeOfAnswers.children[3])
-    }else if(typeOfAnswers.children[0].value =="TrueFalse"){
         getDataFromDOM(typeOfAnswers.children[1])
+    }else if(typeOfAnswers.children[0].value=="ChoseOne"){
+        getDataFromDOM(typeOfAnswers.children[2])
     }
-    // console.log(typeOfAnswers);
 }
 
 
@@ -355,7 +316,7 @@ DOMBODY.addEventListener("click", (e)=>{
     if(e.target.className == "fas fa-chevron-circle-down"){
         hide(e.target.parentElement.parentElement.children[1])
         e.target.className = "fas fa-chevron-circle-up"
-    }if(e.target.className == "fas fa-chevron-circle-up"){
+    }else if(e.target.className == "fas fa-chevron-circle-up"){
         show(e.target.parentElement.parentElement.children[1])
         displayCorrectAnswerIdDOM(e.target.parentElement.parentElement.children[1])
         e.target.className ="fas fa-chevron-circle-down"
@@ -368,9 +329,11 @@ DOMBODY.addEventListener("click", (e)=>{
         e.target.parentElement.remove()
     }if(e.target.id == "btn_displayDailog"){
         displayDialogForm.style.display="flex"
+        removeOldElement()
         document.querySelector("#choseTypeAnswers").value="No_Typeanswers"
     }if(e.target.className == "btn_PostData"){
         postTypeofQuestion(e.target.parentElement.parentElement)
+        // removeOldElement()
     }if(e.target.className=="deleter"){
         let questionToRemove = e.target.parentElement.parentElement.id
         deleteData(questionToRemove)
