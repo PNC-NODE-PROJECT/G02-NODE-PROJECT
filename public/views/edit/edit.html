@@ -5,46 +5,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App quiz</title>
     <!-- api -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!-- 
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
-    <title>App quiz</title>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="../../css/style.css">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <!-- =============================================================================== -->
     <!-- header menu -->
     <div class="menu">
-        <div class="logo">
-            <img src="../../img/logo.png" alt="" width="15%" class="setlogo">
+        <div class="menuHeader">
+            <div class="appLogo"><img src="../../img/logo.png" width="15%"></div>
+            <div class="TitleApp">SMART APP NODE-G02</div>
+            <div class="showUserLogin">
+                <a href="../../index.html">
+                    <i class='fa fa-user-circle-o' style='font-size:24px'></i>
+                    <span class="userLogin"></span>
+                </a>
+             </div>
         </div>
-        <div class="title_onmenu">SMART APP NODE-G02</div>
-        <div class="login"><a href="#" class="setLogin">Logout</a> </div>
     </div>
 
     <!-- =============================================================================== -->
     <!-- contianer CreatForm -->
     <div class="contianerForm">
-        <div class="cardForm">
-            <img src="../../img/back_icon.png" width="40px" alt="" class="imgBack">
-            <!-- <div class="card-header"></div> -->
-            <div class="card-bodys" id="goToupdate">
-                <!-- <form action="#" class="setForm"> -->
-                    <div class="addQuizTitle">
-                        <span class="setTextTitle">Title: <input type="text" id="getTitle" placeholder="Quiz title" class="inputTitle" required></span> 
-                        <!-- <span>Timer : <input type="text" id="gettimer" placeholder="time" class="settime"> </span> -->
-                    </div>
-                    <div class="displayformCreateanswer"><button id="btn_displayDailog">Add Question</button></div>
-                    <!-- Dialog of create question -->
+        <div class="card-bodys">
+            <div class="addQuizTitle">
+                <span class="setTextTitle">Title: <input type="text" id="getTitle" placeholder="Quiz title" class="inputTitle" required></span> 
+            </div>
+            <div class="displayformCreateanswer">
+                <button type="submit" id="btn_displayDailog">Add Question</button>
             </div>
         </div>
             <!-- ============================================================================= -->
             <!-- CONTIANER SHOW LIST QUESTION  -->
             <div class="listQuestion">
-                <h2 class="titleQuiz"><span>Quiz: </span> <span id="subjectQuiz"> </span></h2>
+                <h2 class="titleQuiz" id="hide"><span>Quiz: </span> <span id="subjectQuiz"> </span></h2>
                 <div id="dopDisplayOnscreen">
                     <!-- <div class="setListAdd" id="question_view">
                         <div class="li-getquestion">
@@ -68,6 +68,7 @@
     <!-- display form -->
     <div class="displayDialog" id="hide">
         <div class="contentInput">
+            <div class="hideDialog"><i class="fa fa-remove" style="font: size 30px" id="spanIconHide"></i></div>
             <h1 class="h1-center">Create your question</h1>
             <div class="putScore">Score: <input type="text" placeholder="Set score" id="getScore"></div>
             <div class="set-input">
@@ -82,49 +83,31 @@
                     <option value="ChoseOne">Only Choice</option>
                     <!-- <option value="TrueFalse">True or False</option> -->
                 </select>
-                <!-- true and false -->
-                    <!-- <div class="truefalseAnswer" id="hide">
-                        <label for="check"></label>
-                        <div class="set-input">
-                            <input type="text" placeholder="Option" id="answer" name="answer1" value="True" disabled>
-                            <input type="radio" name="check" id="correctAnswerId">
-                        </div>
-                        <div class="set-input">
-                            <input type="text" placeholder="Option" id="answer" name="answer1" value="False" disabled>
-                            <input type="radio" name="check" id="correctAnswerId">
-                        </div>
-                    </div> -->
-
                     <!-- // multipleAnswer -->
                     <div class="multipleAnswer" id="hide">
                         <div class="set-input">
-                            <input type="text" placeholder="Type answer" id="answer" name="answer1" required>
+                            <input type="text" placeholder="Type answer" id="answer" required>
                             <button class="removeAnswer">remove</button>
                             <input type="checkbox" name="check" id="correctAnswerId" required>
                         </div>
                     </div>
-
                     <div class="optionAnswers" id="hide">
                         <label for="check"></label>
                         <div class="set-input">
-                            <input type="text" placeholder="Type answer" id="answer" name="answer1" required>
+                            <input type="text" placeholder="Type answer" id="answer" required>
                             <button class="removeAnswer">remove</button>
                             <input type="radio" name="check" id="correctAnswerId">
                         </div>
                     </div>
-                    <!-- // ADD TYPE -->
-                    <div class="divAddoption"><button class="addoption" id="hide">Add Answer+</button></div>
+                    <!-- // add type answer input -->
+                    <div class="divAddoption"><button type="submit" class="addoption" id="hide">Add Answer+</button></div>
                     <!-- /// post -->
- 
-                    <div class="postQuestion"><input type="submit" value="SAVE ANSWER" class="btn_PostData"></div>
+                    <div class="postQuestion"><input value="SAVE ANSWER" class="btn_PostData"></div>
             </div>
         </div> 
     </div>
-
-
-
+    <div class="btnPractice" id="hide"><span><a class="classforpractice" href="../../views/play/play.html">Practice</a></span></div>
     <!-- link javascript -->
     <script src="edit.js"></script>
-    <!-- <script src="../../js/mains.js"></script> -->
 </body>
 </html>

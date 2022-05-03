@@ -4,6 +4,7 @@
     box-sizing: border-box;
     margin: 0;
     font-family: 'Poppins', sans-serif;
+    text-decoration: none;
 }
 body{
     background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
@@ -13,7 +14,7 @@ body{
 
 .menu{
     background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-    /* padding: 1rem 4rem;  */
+   
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,7 +22,45 @@ body{
     top: 0;
     padding: 5;
 }
+.menuHeader{
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.menuHeader div{
+    width: 50%;
+}
 
+.btnPractice{
+    width: 10rem;
+    text-align: center;
+    margin: 0 auto;
+    background-color: #0263ca;
+    padding: 1rem;
+    border-radius: 4px;
+}
+.btnPractice .classforpractice{
+    padding: 2rem 0;
+    text-decoration: none;
+    color: white;
+}
+
+.showUserLogin .fa{
+    color: black;
+    cursor: pointer;
+    text-align: center;
+}
+.TitleApp{text-align: center;}
+.showUserLogin{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.userLogin{
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
 
 #hide{
     display: none;
@@ -29,21 +68,13 @@ body{
 #show{
     display: block;
 }
-.menu .login,.title_onmenu,.logo{
-    width: 100%;
-}
+
+/* //// heade userlogin */
 .login{
     text-align: end;
 }
-.setLogin{
-    text-decoration: none;
-    background-color: orange;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 4px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
-}
+
 .contianerApp{
     text-align: center;
 }
@@ -85,64 +116,15 @@ body{
 /* ===================================================================== */
 /* view list questions  */
 
-.contianerList{
-    width: 70%;
+.contianerForm{
+    width: 80%;
     text-align: center;
     margin:2rem auto;
 }
 
-
-.setList{
-    list-style: none;
-    display: grid;
-    grid-template-columns: 30% 30% 30%;
-    gap: 1rem;
-}
-
-.li-item{
-    width: 90%;
-    height: 20vh;
-    font-size: larger;
-    background-color: rgb(20, 99, 245);
-    color: white;
-    border-radius: 10px;
-    padding: 10px;
-    line-height: 2.4rem;
-    cursor: pointer;
-}
 .span-quiz{
     color: black;
     font-weight: bolder;
-}
-.li-item:hover{
-    background-color: blue;
-   transition-duration: 0.5s;
-}
-
-.cardForm{
-    width: 60%;
-    box-sizing: border-box;
-    margin: auto;
-}
-.card-header{
-    height: 25vh;
-    background-image: url(../img/photo.jfif);
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: color-burn;
-    background-color: rgba(0, 0, 0, 0.13);
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-    margin: 1rem;
-    border-radius: 10px;
-
-}
-
-
-.setForm{
-    padding: 10px;
-    
-    box-sizing: border-box;
-    border-radius: 10px;
 }
 
 .addQuizTitle{
@@ -182,7 +164,9 @@ body{
 }
 
 .btn_PostData{
-    /* margin-right: 2.5rem; */
+   cursor: pointer;
+    text-align: center;
+    margin-right: 2.5rem;
     padding: 10px 25px;
     border: none;
     color: white;
@@ -216,13 +200,13 @@ body{
     border-left: 3px solid rgb(6, 10, 223);
     
 }
-.contentInput .h1-center{text-align: center;}
+.contentInput .h1-center{text-align: center; margin-top: 10px;}
 
 .set-input{
     background-color: white;
     width: 100%;
     padding: 8px;
-    margin: 4px 0;
+    /* margin: 4px 0; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -232,7 +216,7 @@ body{
 
 .set-input input[type="text"]{
     width: 100%;
-    padding: 0 10px;
+    /* padding: 0 10px; */
     outline: none;
     border: none;
     font-size: large;
@@ -259,17 +243,16 @@ body{
 }
 
 .divAddoption{
-    margin-top: 4px;
+    margin-top: 1rem;
     text-align: center;
 }
 
-.displayformCreateanswer{margin: 10px; text-align: end;}
+.displayformCreateanswer{margin: 2rem; text-align: end; width: 84%; }
 #btn_displayDailog{padding: 0.6rem;border: none;font-size: larger;border-radius: 4px;}
 
-#btn_displayDailog:hover{transform: scale(1.01); font-weight: bold;color: gray;}
+#btn_displayDailog:hover{color: gray;}
 
 .putScore{
-    /* margin-right: -4.5rem; */
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -283,9 +266,7 @@ body{
     width: 40%;
     padding: 8px 15px;
     border-radius: 10px;
-    /* background-color: rgb(238, 234, 234);
-    border:  none;
-    outline: none; */
+    
 }
 
 .listQuestion{
@@ -303,20 +284,12 @@ body{
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
-.listQuestion button[type="submit"]{
-    padding: 15px 20px;
-    border-radius: 10px;
-    border: none;
-    float: right;
-    font-weight: bolder;
-    margin: 1rem 0;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+.card-bodys{
+    width: 80%;
+    margin: auto;
 }
 
-.listQuestion button[type="submit"]:hover{
-    transform: scale(1.1,1.1);
-    
-}
+
 /* ///// diplay questions */
 
 #dopDisplayOnscreen{
@@ -332,10 +305,6 @@ body{
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 
-#dopDisplayOnscreen span{
-    width: 100%;
-    padding: 1rem 0.2rem;
-}
 .answers_list{
     display: none;
 }
@@ -344,7 +313,7 @@ body{
     background: aliceblue;
     border: 2px solid #84c5fe;
     border-radius: 5px;
-    padding: 0 1rem;
+    padding: 0.5rem 1rem;
     font-size: 1.3rem;
     margin-bottom: 10px;
     cursor: pointer;
@@ -389,6 +358,17 @@ body{
     border-color: #a42834;
 }
 
+.hideDialog {
+    margin-top: -2rem;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 3rem;
+    
+}
+.hideDialog #spanIconHide:hover{
+    color: #a42834;
+}
+
 #dopDisplayOnscreen .clickDesplay{
     text-align: center;
 }
@@ -401,14 +381,16 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #0464ca;
+    /* background: #0464ca; */
     border-radius: 4px;
     padding:0 0.5rem;
+   background-color: #23903c;
+    font-size: 120%;
     color: white;
-    font-size: 1.6rem;
+    font-weight: lighter;
 }
 .btnInQuest{
-    background: #0464ca;
+    background-color: #23903c;
     border: none;
     width: 20%;
     display: flex;
@@ -815,30 +797,31 @@ footer button.show{
         display: grid;
         grid-template-columns: 55% 55%;
     }
-    .cardForm{
-        width: 99%;
-    }
+    .card-bodys{width: 99%;}
     .listQuestion{
         width: 95%;
     }
+  
 }
 
 /* form login */
 
-.containers{
-    display: grid;
-    height: 100vh;
+.contianerFormLogin{
     width: 100%;
     place-items: center;
-    background: #343a40;
+    background: #343a4059;
+  
 } 
+
 ::selection{
   background: #3f34bf;
   color: #fff;
 }
 .wrapper{
   overflow: hidden;
-  max-width: 390px;
+  margin: 0 auto;
+  width: 30%;
+  background-color: #155724;
   background: #fff;
   padding: 30px;
   border-radius: 5px;
@@ -1032,16 +1015,23 @@ form .btn input[type="submit"]{
 }
 .card-group {
     display: flex;
-    justify-content: space-between;
-    margin: 0 auto;
-    width: 50%;
-    padding: 15px 12px 10px;
+    margin: auto;
+    width: 80%;
+    gap: 1rem;
 }
 .field:hover{
     border-color: #50a4f8;
     border-radius: 5px;
 }
-
+.topicQuizz{
+    
+    text-align: center;
+    width: 20%;
+    margin: 2rem auto;
+    padding: 1rem 0;
+    border-radius: 4px;
+    font-size: 2.5rem;
+}
 .field{
     box-sizing: border-box;
     border: 1px solid lightgrey;
@@ -1067,7 +1057,7 @@ form .btn input[type="submit"]{
     margin: auto;
 }
 
-.fa-eye{
+.fa-eye, .fa-eye-slash{
     position: relative;
     cursor: pointer;
     margin: auto;

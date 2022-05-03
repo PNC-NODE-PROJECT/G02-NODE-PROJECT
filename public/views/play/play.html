@@ -10,17 +10,19 @@
     <link rel="stylesheet" href="../../css/style.css">
     <!-- FontAweome CDN Link for Icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-      <!-- header menu -->
     <div class="menu">
-        <div class="logo">
-            <img src="../../img/logo.png" alt="" width="15%" class="setlogo">
+        <div class="menuHeader">
+            <div class="appLogo"><img src="../../img/logo.png" width="15%"></div>
+            <div class="TitleApp">SMART APP NODE-G02</div>
+            <div class="showUserLogin">
+                <i class='fa fa-user-circle-o' style='font-size:24px'></i>
+                <span class="userLogin"></span>
+            </div>
         </div>
-        <div class="title_onmenu">SMART APP NODE-G02</div>
-        <div class="login"><a href="http://localhost/" class="setLogin">Logout</a> </div>
     </div>
-
     <!-- start Quiz button -->
     <div class="start_btn"><button>Start Quiz</button></div>
 
@@ -86,7 +88,7 @@
         </div>
         <div class="buttons">
             <button class="restart">Replay Quiz</button>
-            <button class="quit">Quit Quiz</button>
+            <button class="quit"><a href="../../index.html">Quit Quiz</a> </button>
         </div>
     </div>
 

@@ -3,75 +3,25 @@ const URL = "http://localhost:80"
 
 function requestFromServer(){
     let id = JSON.parse(localStorage.getItem("QUIZ_ID"+JSON.parse(localStorage.getItem("USER_ID"))))
-    axios.get(URL + "/questions/quiz/"+id).then((respone)=>{
+    axios.get(URL + "/questions/question/"+id).then((respone)=>{
         let questions = respone.data
         localStorage.setItem("YOUR_QUIZ", JSON.stringify(questions))
     })
 }
 
 let questions = JSON.parse(localStorage.getItem("YOUR_QUIZ"));
-
 requestFromServer()
-
-
-// let questions = [
-//     {
-//     question: "What does HTML stand for?",
-//     answer: ["Hyper Text Markup Language"],
-//     options: [
-//       "Hyper Text Preprocessor",
-//       "Hyper Text Markup Language",
-//       "Hyper Text Multiple Language",
-//       "Hyper Tool Multi Language",
-//       "Hyper Tool Multi Language",
-//       "Hyper Tool Multi Language"
-//     ],
-//     score:10
-//   },
-//     {
-    
-//     question: "What does CSS stand for?",
-//     answer:[ "Cascading Style Sheet"],  
-//     options: [
-//       "Cascading Style Sheet"
-//     ],
-//     score:10
-//   },
-//     {
-    
-//     question: "What does PHP stand for?",
-//     answer:[ "Hypertext Preprocessor"],
-//     options: [
-//       "Hypertext Preprocessor",
-//       "Hypertext Programming",
-//       "Hypertext Preprogramming",
-//       "Hometext Preprocessor"
-//     ],
-//     score:10
-//   },
-//     {
-    
-//     question: "What does SQL stand for?",
-//     answer:[ "Structured Query Language"],
-//     options: [
-      
-//       "Structured Query Language"
-//     ],
-//     score:10
-//   },
-//     {
-    
-//     question: "What does XML stand for?",
-//     answer:[ "eXtensible Markup Language"],
-//     options: [
-//       "eXtensible Markup Language",
-      
-//     ],
-//     score:10
-//   },
+///user login
+function userHaslogined() {
+    let userInfor = JSON.parse(localStorage.getItem("USER_LOGIN"));
+    for(user of userInfor){
+      if(user.username!=""){
+        document.querySelector(".userLogin").textContent = user.username
+      }
+    }
+  }
+userHaslogined()
   
-// ];
-
 
 //selecting all required elements
 const start_btn = document.querySelector(".start_btn button");
@@ -92,7 +42,16 @@ const DOMBUTTON_BODY = document.body
 start_btn.onclick = ()=>{
     info_box.classList.add("activeInfo"); //show info box
     requestFromServer()
+    userHaslogined()
+    questions = JSON.parse(localStorage.getItem("YOUR_QUIZ"));
+   questions.forEach(element => {
+       document.querySelector(".title").textContent=element.quizId[1].title
+       
+   });
+   
 }
+
+
 
 // if exitQuiz button clicked
 exit_btn.onclick = ()=>{
@@ -101,7 +60,7 @@ exit_btn.onclick = ()=>{
 
 // if continueQuiz button clicked
 continue_btn.onclick = ()=>{
-   
+    
     info_box.classList.remove("activeInfo"); //hide info box
     quiz_box.classList.add("activeQuiz"); //show quiz box
     showQuetions(0); //calling showQestions function
@@ -121,7 +80,7 @@ let widthValue = 0;
 let clickAnswers = 0
 
 const restart_quiz = result_box.querySelector(".buttons .restart");
-const quit_quiz = result_box.querySelector(".buttons .quit");
+// const quit_quiz = result_box.querySelector(".buttons .quit");
 
 // if restartQuiz button clicked
 restart_quiz.onclick = ()=>{
@@ -146,9 +105,9 @@ restart_quiz.onclick = ()=>{
 }
 
 // if quitQuiz button clicked
-quit_quiz.onclick = ()=>{
-    window.location.reload(); //reload the current window
-}
+// quit_quiz.onclick = ()=>{
+//     window.location.reload(); //reload the current window
+// }
 
 const next_btn = document.querySelector("footer .next_btn");
 const bottom_ques_counter = document.querySelector("footer .total_que");

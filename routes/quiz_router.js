@@ -15,22 +15,20 @@ router.get('/quiz', (req, res) => {
 })
 
 // for edite
-
-router.post('/quiz', (req, res) => {
-    let isAddquestion = exportModel.QuestionModel.create(req.body)
-    if (isAddquestion) {
-        res.status(201).send({
-            "message": 'Quiz is post succed'
-        })
-    } else {
-        res.status(500).send({
-            "message": 'All field required'
-        })
-    }
+router.get("/quiz/:title", (req, res)=>{
+    exportModel.QuizModel.find({title: req.params.title})
+    .then((result)=>{ console.log(result); res.send(result)})
 })
 
 
+router.post('/quiz', (req, res) => {
+    exportModel.QuizModel.create(req.body)
+    .then((result)=>{
+        if(result){res.status(201).send({"message": 'Quiz is post succed'})}
+        else{res.status(500).send({"message": 'All field required'})}
+    })
 
+})
 
 // create 
 

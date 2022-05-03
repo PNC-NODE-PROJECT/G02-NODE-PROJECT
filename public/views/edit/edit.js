@@ -29,6 +29,19 @@ function hide(element){
 function show(element){
     element.style.display="block"
 }
+// user login
+
+function userHaslogined() {
+    let userInfor = JSON.parse(localStorage.getItem("USER_LOGIN"));
+    for(user of userInfor){
+      if(user.username!=""){
+        document.querySelector(".userLogin").textContent = user.username
+      }
+    }
+  }
+userHaslogined()
+  
+
 
 function updateData(update){
     // TODO: Request to the server to update one task as completed
@@ -37,7 +50,6 @@ function updateData(update){
     .catch((error)=>{console.log(error)})
     requestData()
 }
-
 
  // TODO: Request to the server to detele one task
 
@@ -58,11 +70,19 @@ function addData(add){
     requestData()
 }
 
+function UpdateQuizTitle(title){
+    console.log("update title quiz is", title);
+    let id = JSON.parse(localStorage.getItem("EDIT_ID"+ JSON.parse(localStorage.getItem("USER_ID"))))
+    let body = {title: title}
+    axios.put(URL + "/quizses/update/" + id,body)
+    .catch((error)=>{console.log(error)})
+}
+
  // TODO: request from from server and update DOM
 
 function requestData(){
     let id = JSON.parse(localStorage.getItem("EDIT_ID"+ JSON.parse(localStorage.getItem("USER_ID"))))
-    axios.get(URL +"/questions/quiz/"+id)
+    axios.get(URL +"/questions/question/"+id)
     .then((result)=>{refreshDOM(result.data); console.log("my data in", result.data);})
     .catch((error)=>{console.log("You are error at", error)})
 }
@@ -76,8 +96,13 @@ function refreshDOM(displayData){
     displayData = displayData.reverse()
     while (displayDomscreen.firstChild) {displayDomscreen.removeChild(displayDomscreen.lastChild)}
     displayData.forEach(element => {
-        document.getElementById("getTitle").value=element.quizId.title
-        document.getElementById("subjectQuiz").textContent=element.quizId.title
+        if(element.quizId.title.length>2){
+            (document.querySelector(".titleQuiz").style.display="flex"); 
+            document.querySelector(".addQuizTitle").style.display="none"
+            document.querySelector(".btnPractice").style.display="block"
+        }
+        document.getElementById("getTitle").value = element.quizId.title
+        document.getElementById("subjectQuiz").textContent = element.quizId.title
         let defualtScore = "0.0"
         const questionAndAnswersDom=document.createElement("div")
         questionAndAnswersDom.className = "setListAdd"
@@ -107,7 +132,6 @@ function refreshDOM(displayData){
         answersDom.className = "answers_list";
         let answers = element.answers
         let correctANswers = element.isCorrect
-       
         for (num = 0; num < answers.length; num++){
             let divOption = document.createElement("div")
             let spanAnswer = document.createElement("span");
@@ -117,8 +141,6 @@ function refreshDOM(displayData){
             correctANswers.forEach(element => {if(answers[num]== element){divOption.className = "option correct"}})
             answersDom.appendChild(divOption)
         }
- 
-        // create dom show and hide answer
 
         let dom_onHideAndShow=document.createElement("div");
         dom_onHideAndShow.className = "clickDesplay";
@@ -139,7 +161,6 @@ function refreshDOM(displayData){
 
 function displayCorrectAnswerIdDOM(option){
     for (item of option.children){
-        console.log("My option is :", item);
         let iconTage = document.createElement("div")
         let icon = document.createElement("i")
         if(item.className=="option correct"){
@@ -149,8 +170,8 @@ function displayCorrectAnswerIdDOM(option){
             
         }else{
             item.className="option incorrect"
-            iconTage.className ="icon cross"
-            icon.className = "fas fa-times"
+            // iconTage.className ="icon cross"
+            // icon.className = "fas fa-times"
         }
         if(!item.children[1]){
             iconTage.appendChild(icon)
@@ -168,7 +189,6 @@ function getRequesToUpdateDataInDom(questionIdToupdate){
         let questionToupdate = result.data
         questionToupdate.forEach(element => {if(questionIdToupdate == element._id){showDomToUpdateData(element)}});
     })
-    
 }
 
 // show DOM to update
@@ -211,7 +231,6 @@ function showDomToUpdateData(dataToupdate){
 
 function removeOldElement(){
     while (answerOption.firstChild) {answerOption.removeChild(answerOption.lastChild)}
-
     while (multipleAnswers.firstChild) {multipleAnswers.removeChild(multipleAnswers.lastChild)}
 }
 
@@ -220,33 +239,56 @@ function getDataFromDOM(typeInput){
     let data = {}
     let getAnswers=[]
     let isCorrectAnswer=[]
+    let isAllInput=true;
+    let isInputCheck=false;
     let quizTitle= document.getElementById("getTitle").value
+    UpdateQuizTitle(quizTitle)
     let userSetScore = document.getElementById("getScore").value
     let questionInput = document.getElementById("QuestionId").value
     let dom_Answers = typeInput.querySelectorAll("#answer");
     let dom_CorrectAnswers = typeInput.querySelectorAll("#correctAnswerId");
     for(index = 0; index<dom_Answers.length; index++){
         if(dom_Answers[index].value ==""){
-            dom_Answers[index].parentElement.parentElement.remove()
+            isAllInput=false
         }
         getAnswers.push(dom_Answers[index].value)
         if(dom_CorrectAnswers[index].checked){
             isCorrectAnswer.push(dom_Answers[index].value)
+            isInputCheck=true
         }
+    }if(userSetScore==""){userSetScore="10"}
+    //// check post
+    if(questionInput !="" && isAllInput==true && isInputCheck==true){
+        swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Question has completed',
+            showConfirmButton: false,
+            timer: 3000
+        }) 
+        data.question = questionInput
+        data.isCorrect = isCorrectAnswer
+        data.answers = getAnswers
+        data.score = parseInt(userSetScore)
+        if(getAnswers.length > 0 && isCorrectAnswer.length > 0 && btn_Requestpostdata.value == "SAVE ANSWER"){
+            addData(data)
+        }if(parameterButtonUpdateOrAdd == "UPDATE"){
+            updateData(data)  
+        }
+        clearFormInput(typeInput)
+        hide(displayDialogForm)
+    }else{
+        swal.fire({
+            icon: 'error',
+            title: 'Cannot Add',
+            text: 'Check all input must be complete',
+            timer: 5000
+        })
     }
-    data.question = questionInput
-    data.isCorrect = isCorrectAnswer
-    data.answers = getAnswers
-    data.score = parseInt(userSetScore)
-    data.quiz = quizTitle
-    if(getAnswers.length > 0 && isCorrectAnswer.length > 0 && btn_Requestpostdata.value == "SAVE ANSWER"){
-        addData(data)
-    }if(parameterButtonUpdateOrAdd == "UPDATE"){
-        updateData(data)  
-    }
-    clearFormInput(typeInput)
-    hide(displayDialogForm)
 }
+
+
+
 
 // clear user in put
 
@@ -268,7 +310,7 @@ function displayTypeanswers(type){
         show(multipleAnswers)
         show(btnAddmultipleorOption)
         hide(answerOption)
-       }else if(type =="ChoseOne"){
+       }else if(type == "ChoseOne"){
         show(answerOption)
         show(btnAddmultipleorOption)
         hide(multipleAnswers)
@@ -297,20 +339,18 @@ function postTypeofQuestion(typeOfAnswers){
         getDataFromDOM(typeOfAnswers.children[1])
     }else if(typeOfAnswers.children[0].value=="ChoseOne"){
         getDataFromDOM(typeOfAnswers.children[2])
+    }else{
+        swal.fire({
+            icon: 'error',
+            title: 'Cannot save',
+            text: 'Please check your answer and question',
+            timer: 5000
+        })
     }
 }
 
 
 // TODO: event button
-
-// click add question or update
-
-
-// click delete question or update
-
-
-// button to show and hind answer
-
 
 DOMBODY.addEventListener("click", (e)=>{
     if(e.target.className == "fas fa-chevron-circle-down"){
@@ -333,7 +373,6 @@ DOMBODY.addEventListener("click", (e)=>{
         document.querySelector("#choseTypeAnswers").value="No_Typeanswers"
     }if(e.target.className == "btn_PostData"){
         postTypeofQuestion(e.target.parentElement.parentElement)
-        // removeOldElement()
     }if(e.target.className=="deleter"){
         let questionToRemove = e.target.parentElement.parentElement.id
         deleteData(questionToRemove)
@@ -342,6 +381,13 @@ DOMBODY.addEventListener("click", (e)=>{
         getRequesToUpdateDataInDom(questionIdToupdate)
         btn_Requestpostdata.value="UPDATE"
         parameterButtonUpdateOrAdd="UPDATE"
-    }
+    }if(e.target.id=="spanIconHide"){
+        hide(displayDialogForm)
+        removeOldElement()
+    }if(e.target.textContent == "Practice"){
+        let id = JSON.parse(localStorage.getItem("EDIT_ID"+ JSON.parse(localStorage.getItem("USER_ID"))))
+        localStorage.setItem("QUIZ_ID"+JSON.parse(localStorage.getItem("USER_ID")), JSON.stringify(id))
+        console.log(e.target);
+      }
 
 })
