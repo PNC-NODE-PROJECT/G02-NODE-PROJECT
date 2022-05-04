@@ -31,7 +31,9 @@ body{
 .menuHeader div{
     width: 50%;
 }
-
+.appLogo{
+    margin-left: 1rem;
+}
 .btnPractice{
     width: 10rem;
     text-align: center;
@@ -589,9 +591,12 @@ section{
 
 section .que_text{
     font-size: 25px;
-    font-weight: 600;
+    /* font-weight: lighter; */
 }
-
+.viewCorrectionquiz{
+    background: aliceblue;
+    height: 100vh;
+}
 section .option_list{
     padding: 20px 0px;
     display: block;   
@@ -603,6 +608,7 @@ section .option_list .option{
     border-radius: 5px;
     padding: 8px 15px;
     font-size: 17px;
+    font-weight: lighter;
     margin-bottom: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
