@@ -103,7 +103,6 @@ function refreshDOM(displayData){
         }
         document.getElementById("getTitle").value = element.quizId.title
         document.getElementById("subjectQuiz").textContent = element.quizId.title
-        let defualtScore = "0.0"
         const questionAndAnswersDom=document.createElement("div")
         questionAndAnswersDom.className = "setListAdd"
         const questionDOM = document.createElement("div")
@@ -194,7 +193,6 @@ function getRequesToUpdateDataInDom(questionIdToupdate){
 // show DOM to update
 
 function showDomToUpdateData(dataToupdate){
-    // console.log("data to up date is", dataToupdate);
     document.getElementById("getScore").value = dataToupdate.score
     document.getElementById("QuestionId").value = dataToupdate.question
     removeOldElement()
@@ -210,7 +208,7 @@ function showDomToUpdateData(dataToupdate){
                 multipleAnswers.insertAdjacentHTML("beforeend", inputMultipleAnswerTag)  
         }
         show(multipleAnswers) 
-        document.getElementById("choseTypeAnswers").value ="Multiple"
+        document.getElementById("choseTypeAnswers").value ="Checkbox"
     }else{
         
         inputOptionAnswerTag=""
@@ -224,7 +222,7 @@ function showDomToUpdateData(dataToupdate){
             answerOption.insertAdjacentHTML("beforeend", inputOptionAnswerTag)
         }
         show(answerOption)
-        document.getElementById("choseTypeAnswers").value ="ChoseOne"
+        document.getElementById("choseTypeAnswers").value ="Multiple"
     }
     document.querySelector(".displayDialog").style.display="flex"
 }
@@ -256,7 +254,7 @@ function getDataFromDOM(typeInput){
             isCorrectAnswer.push(dom_Answers[index].value)
             isInputCheck=true
         }
-    }if(userSetScore==""){userSetScore="10"}
+    }if(userSetScore==""){userSetScore="1"}
     //// check post
     if(questionInput !="" && isAllInput==true && isInputCheck==true){
         swal.fire({
@@ -287,9 +285,6 @@ function getDataFromDOM(typeInput){
     }
 }
 
-
-
-
 // clear user in put
 
 function clearFormInput(typeInput){
@@ -301,16 +296,14 @@ function clearFormInput(typeInput){
     btn_Requestpostdata.value="SAVE ANSWER"
 }
 
-
-
 /////////////// chose type answers ////////////////////
 
 function displayTypeanswers(type){
-    if(type =="Multiple"){
+    if(type =="Checkbox"){
         show(multipleAnswers)
         show(btnAddmultipleorOption)
         hide(answerOption)
-       }else if(type == "ChoseOne"){
+       }else if(type == "Multiple"){
         show(answerOption)
         show(btnAddmultipleorOption)
         hide(multipleAnswers)
@@ -318,26 +311,25 @@ function displayTypeanswers(type){
         hide(multipleAnswers)
         hide(btnAddmultipleorOption)
         hide(answerOption)
-        
     }
 }
 
 function addInputanswers(typeOfadd){
-    if(typeOfadd.children[0].value=="Multiple"){
+    if(typeOfadd.children[0].value=="Checkbox"){
         inputAnswerTag = ""
         inputAnswerTag = '<div class="set-input"> <input type="text" placeholder="Type answer" id="answer" name="answer1" required><button class="removeAnswer">remove</button> <input type="checkbox" name="check" id="correctAnswerId" required> </div>'
-   
         multipleAnswers.insertAdjacentHTML("beforeend", inputAnswerTag)
-    }else if(typeOfadd.children[0].value=="ChoseOne"){
+    }else if(typeOfadd.children[0].value=="Multiple"){
         inputAnswerTag=""
         inputAnswerTag = '<label for="check"></label> <div class="set-input"> <input type="text" placeholder="Type answer" id="answer" name="answer1" required><button class="removeAnswer">remove</button> <input type="radio" name="check" id="correctAnswerId" required> </div>'
         answerOption.insertAdjacentHTML("beforeend", inputAnswerTag)
     }
 }
+
 function postTypeofQuestion(typeOfAnswers){
-    if(typeOfAnswers.children[0].value=="Multiple"){
+    if(typeOfAnswers.children[0].value=="Checkbox"){
         getDataFromDOM(typeOfAnswers.children[1])
-    }else if(typeOfAnswers.children[0].value=="ChoseOne"){
+    }else if(typeOfAnswers.children[0].value=="Multiple"){
         getDataFromDOM(typeOfAnswers.children[2])
     }else{
         swal.fire({
@@ -368,8 +360,17 @@ DOMBODY.addEventListener("click", (e)=>{
     }if(e.target.className == "removeAnswer"){
         e.target.parentElement.remove()
     }if(e.target.id == "btn_displayDailog"){
-        displayDialogForm.style.display="flex"
-        removeOldElement()
+        if(document.querySelector("#getTitle").value!=""){
+            displayDialogForm.style.display="flex"
+            removeOldElement()
+        }else{
+            swal.fire({
+                icon: 'error',
+                title: 'Cannot add your question',
+                text: 'Please complete your title',
+                timer: 5000
+            })
+        }
         document.querySelector("#choseTypeAnswers").value="No_Typeanswers"
     }if(e.target.className == "btn_PostData"){
         postTypeofQuestion(e.target.parentElement.parentElement)

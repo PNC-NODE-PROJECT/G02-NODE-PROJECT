@@ -14,7 +14,6 @@ router.get('/get', (req, res) => {
 
 // get question by id quiz
 router.get("/question/:id", (req, res)=>{
-    console.log(req.params.id);
     exportModel.QuestionModel.find({quizId: req.params.id})
     .populate("quizId")
     .then((result)=>{ console.log(result); res.send(result)})

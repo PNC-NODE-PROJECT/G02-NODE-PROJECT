@@ -8,9 +8,9 @@ function requestFromServer(){
         localStorage.setItem("YOUR_QUIZ", JSON.stringify(questions))
     })
 }
-
 let questions = JSON.parse(localStorage.getItem("YOUR_QUIZ"));
 requestFromServer()
+
 ///user login
 function userHaslogined() {
     let userInfor = JSON.parse(localStorage.getItem("USER_LOGIN"));
@@ -21,7 +21,6 @@ function userHaslogined() {
     }
   }
 userHaslogined()
-  
 
 //selecting all required elements
 const start_btn = document.querySelector(".start_btn button");
@@ -37,7 +36,6 @@ const timeCount = document.querySelector(".timer .timer_sec");
 const typeAnswers = document.querySelector(".typeOfAnswer")
 const DOMBUTTON_BODY = document.body
 
-
 // if startQuiz button clicked
 start_btn.onclick = ()=>{
     info_box.classList.add("activeInfo"); //show info box
@@ -46,12 +44,8 @@ start_btn.onclick = ()=>{
     questions = JSON.parse(localStorage.getItem("YOUR_QUIZ"));
    questions.forEach(element => {
        document.querySelector(".title").textContent=element.quizId.title
-       console.log("Title quiz is", element.quizId.title);
-   });
-   
+   }); 
 }
-
-
 
 // if exitQuiz button clicked
 exit_btn.onclick = ()=>{
@@ -60,7 +54,6 @@ exit_btn.onclick = ()=>{
 
 // if continueQuiz button clicked
 continue_btn.onclick = ()=>{
-    
     info_box.classList.remove("activeInfo"); //hide info box
     quiz_box.classList.add("activeQuiz"); //show quiz box
     showQuetions(0); //calling showQestions function
@@ -128,13 +121,11 @@ next_btn.onclick = ()=>{
     }
 }
 
-
 function showQuetions(index){
     const questionDOM = document.querySelector(".que_text");
     if(questions[index].isCorrect.length == 1){
         typeAnswers.innerHTML = "There is "+ questions[index].isCorrect.length + " answer correct !!!"
     }else{typeAnswers.innerHTML = "There are "+ questions[index].isCorrect.length + " answers correct !!!"}
-
 
     let dom_Question = '<span>'+ que_numb + ". " + questions[index].question + " (" + questions[index].score + 'pt )</span>';
     let numOfAnswers = questions[index].answers
@@ -155,10 +146,8 @@ function showQuetions(index){
     }
 }
 
-
 let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
 let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
-
 
 function optionSelected(answer){
     clickAnswers ++
@@ -203,7 +192,6 @@ function showResult(){
     result_box.classList.add("activeResult");
     const scoreText = result_box.querySelector(".score_text");
     if (userScore > totalScore-totalScore/4){
-        
         let scoreTag = '<span>and congrats! 🎉, You got <p>'+ userScore +'</p> out of <p>'+ totalScore +'</p></span>';
         scoreText.innerHTML = scoreTag;
     }
@@ -253,7 +241,6 @@ function startTimer(time){
 
 function startTimerLine(time){
     let widthOfdomline = quiz_box.clientWidth-1
-    console.log("my line is", widthOfdomline);
     counterLine = setInterval(timer, 29);
     function timer(){
         time += 1; 

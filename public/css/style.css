@@ -285,7 +285,9 @@ body{
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
-
+button{
+    cursor: pointer;
+}
 .card-bodys{
     width: 80%;
     margin: auto;
@@ -364,7 +366,7 @@ body{
     margin-top: -2rem;
     display: flex;
     justify-content: flex-end;
-    font-size: 3rem;
+    font-size: 2.4rem;
     
 }
 .hideDialog #spanIconHide:hover{
@@ -405,12 +407,12 @@ body{
     margin: 0 5px;
     border-radius: 50%;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-  
+    background-color: white;
 }
 
 .setListAdd img:hover{
     transform: scale(1,1);
-    background-color: white;
+   
 }
 
 
@@ -608,7 +610,6 @@ section .option_list .option{
     border-radius: 5px;
     padding: 8px 15px;
     font-size: 17px;
-    font-weight: lighter;
     margin-bottom: 15px;
     cursor: pointer;
     transition: all 0.3s ease;

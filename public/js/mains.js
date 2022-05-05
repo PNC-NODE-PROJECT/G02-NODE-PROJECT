@@ -137,6 +137,7 @@ btnquiz.addEventListener("click", showquizses);
 //     show.style.color = "#111";
 //   }
 // }
+
 // function icons eye show password and hide
 function showpswrd(){
   let inputType=document.querySelectorAll(".pswrd")
@@ -169,7 +170,6 @@ for (let hige of higes) {
 ///// view topic of quiz
 
 function refreshDOMToViewTopic(quizses){
-
   while(DomOfQuizses.firstChild){DomOfQuizses.removeChild(DomOfQuizses.lastChild)}
   quizses.forEach(element => {
     if(element.title!="..."){
@@ -201,7 +201,9 @@ function getInforOfUser(userpassword){
 
 function requestQuizsesFromServer(){
   axios.get("quizses/quiz").then((result)=>{
-    refreshDOMToViewTopic(result.data)
+    let datas = result.data
+    refreshDOMToViewTopic(datas.reverse())
+
   }).catch((error)=>console.log(error))
 }
 requestQuizsesFromServer()
