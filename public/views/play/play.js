@@ -1,9 +1,7 @@
 
-const URL = "http://localhost:80"
-
 function requestFromServer(){
     let id = JSON.parse(localStorage.getItem("QUIZ_ID"+JSON.parse(localStorage.getItem("USER_ID"))))
-    axios.get(URL + "/questions/question/"+id).then((respone)=>{
+    axios.get("/questions/question/"+id).then((respone)=>{
         let questions = respone.data
         localStorage.setItem("YOUR_QUIZ", JSON.stringify(questions))
     })
@@ -148,7 +146,7 @@ function showQuetions(index){
 
 let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
 let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
-
+/// when user click on answers
 function optionSelected(answer){
     clickAnswers ++
     let userAns = answer.textContent; 
@@ -238,6 +236,7 @@ function startTimer(time){
         }
     }
 }
+
 
 function startTimerLine(time){
     let widthOfdomline = quiz_box.clientWidth-1

@@ -11,7 +11,6 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="../../css/style.css">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -74,33 +73,25 @@
             <div class="set-input">
                 <input type="text" id="QuestionId" placeholder="Type question" required>
             </div>
-            <div>Chose type your answers</div>
-
+            <div>Choose type your answers</div>
             <div class="allTypeanswers">
+                <!-- --- Choose type answer of questions --- -->
                 <select name="selectType" id="choseTypeAnswers">
                     <option value="No_Typeanswers">Type answer</option>
                     <option value="Checkbox">Checkbox</option>
                     <option value="Multiple">Multiple choice</option>
                 </select>
-                    <div class="multipleAnswer" id="hide">
-                        <div class="set-input">
-                            <input type="text" placeholder="Type answer" id="answer" required>
-                            <button class="removeAnswer">remove</button>
-                            <input type="checkbox" name="check" id="correctAnswerId" required>
-                        </div>
-                    </div>
-                    <div class="optionAnswers" id="hide">
-                        <label for="check"></label>
-                        <div class="set-input">
-                            <input type="text" placeholder="Type answer" id="answer" required>
-                            <button class="removeAnswer">remove</button>
-                            <input type="radio" name="check" id="correctAnswerId">
-                        </div>
-                    </div>
-                    <!-- // add type answer input -->
-                    <div class="divAddoption"><button type="submit" class="addoption" id="hide">Add Answer+</button></div>
-                    <!-- /// post -->
-                    <div class="postQuestion"><input type="submit" value="SAVE ANSWER" class="btn_PostData"></div>
+                <div class="multipleAnswer" id="hide">
+                    <!-- --- Checkbox answers --- -->
+                </div>
+                <div class="optionAnswers" id="hide">
+                    <!-- --- Option answer --- -->
+                </div>
+
+                <!-- // add type answer input -->
+                <div class="divAddoption"><button type="submit" class="addoption" id="hide">Add Answer+</button></div>
+                <!-- /// post -->
+                <div class="postQuestion"><input type="submit" value="SAVE ANSWER" class="btn_PostData"></div>
             </div>
         </div> 
     </div>

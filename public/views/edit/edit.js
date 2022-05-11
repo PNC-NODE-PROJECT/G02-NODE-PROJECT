@@ -1,7 +1,4 @@
 
-// TODO: get URL api
-
-const URL = "http://localhost:80"
 
 //TODO: selecting all required elements
 
@@ -46,7 +43,7 @@ userHaslogined()
 function updateData(update){
     // TODO: Request to the server to update one task as completed
     let body = {question:update.question, isCorrect:update.isCorrect, answers:update.answers, score:update.score}
-    axios.put(URL + "/questions/update/" + paraIdOfquestionToupdate,body)
+    axios.put("/questions/update/" + paraIdOfquestionToupdate,body)
     .catch((error)=>{console.log(error)})
     requestData()
 }
@@ -54,7 +51,7 @@ function updateData(update){
  // TODO: Request to the server to detele one task
 
 function deleteData(question){
-    axios.delete(URL + "/questions/delete/" + question)
+    axios.delete("/questions/delete/" + question)
     .catch((error)=>{console.log(error)})
     requestData()
 }
@@ -64,7 +61,7 @@ function deleteData(question){
 function addData(add){
     let id = JSON.parse(localStorage.getItem("EDIT_ID"+ JSON.parse(localStorage.getItem("USER_ID"))))
     let body = {quizId:id, question:add.question, isCorrect:add.isCorrect, answers:add.answers, score:add.score}
-    axios.post(URL + "/questions/add", body)
+    axios.post("/questions/add", body)
     .then((result)=>{console.log(result)})
     .catch((error)=>{console.log("My post is error at", error)})
     requestData()
@@ -74,7 +71,7 @@ function UpdateQuizTitle(title){
     console.log("update title quiz is", title);
     let id = JSON.parse(localStorage.getItem("EDIT_ID"+ JSON.parse(localStorage.getItem("USER_ID"))))
     let body = {title: title}
-    axios.put(URL + "/quizses/update/" + id,body)
+    axios.put("/quizses/update/" + id,body)
     .catch((error)=>{console.log(error)})
 }
 
@@ -82,7 +79,7 @@ function UpdateQuizTitle(title){
 
 function requestData(){
     let id = JSON.parse(localStorage.getItem("EDIT_ID"+ JSON.parse(localStorage.getItem("USER_ID"))))
-    axios.get(URL +"/questions/question/"+id)
+    axios.get("/questions/question/"+id)
     .then((result)=>{refreshDOM(result.data); console.log("my data in", result.data);})
     .catch((error)=>{console.log("You are error at", error)})
 }
@@ -91,7 +88,6 @@ requestData()
 
 //////////////// show list question ////////////////////////
 function refreshDOM(displayData){
-    console.log("My data is: ", displayData);
     parameterButtonUpdateOrAdd="SAVE ANSWER"
     displayData = displayData.reverse()
     while (displayDomscreen.firstChild) {displayDomscreen.removeChild(displayDomscreen.lastChild)}
@@ -353,7 +349,7 @@ DOMBODY.addEventListener("click", (e)=>{
         displayCorrectAnswerIdDOM(e.target.parentElement.parentElement.children[1])
         e.target.className ="fas fa-chevron-circle-down"
     }if(e.target.id == "choseTypeAnswers"){
-        displayTypeanswers(e.target.value)
+        displayTypeanswers(e.target.value) /// when click one select type of answer
     }if(e.target.className == "addoption"){
         addInputanswers(e.target.parentElement.parentElement)
         

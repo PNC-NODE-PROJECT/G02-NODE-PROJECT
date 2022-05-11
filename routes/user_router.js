@@ -25,6 +25,7 @@ router.post('/create', (req, res) => {
         res.send(result)
     })
 })
+
 // login check
 router.post("/login",(req, res) => {
     let useremail = req.body.email;
@@ -41,9 +42,6 @@ router.post("/login",(req, res) => {
         console.log(error)
     });
 })
-
-// when
-
 
 // TODO: export router
 module.exports = router
