@@ -20,10 +20,29 @@ router.get("/logined/:userpassword", (req, res)=>{
 
 // create user 
 router.post('/create', (req, res) => {
-    exportModel.UserModel.create(req.body)
-    .then((result)=> {
-        res.send(result)
-    })
+    exportModel.UserModel.find()
+        .then((getresult) => {
+            let isFoundUser = true;
+            let registEmail = req.body.email;
+            getresult.forEach(user => {
+                if (user.email == registEmail) {
+                    isFoundUser = false;
+                }
+            })
+            if (isFoundUser) {
+            exportModel.UserModel.create(req.body)
+                    .then((result) => {
+                        res.send(result);
+                    })
+                    .catch((error) => {
+                        res.send(error);
+                    });
+            } else {
+                res.send("Email is already exist");
+            }
+        }).catch((error) => {
+        res.send(error);
+    });
 })
 
 // login check

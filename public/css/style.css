@@ -368,10 +368,10 @@ button{
 }
 
 .hideDialog {
-    margin-top: -2rem;
+    margin-top: -1.5rem;
     display: flex;
     justify-content: flex-end;
-    font-size: 2.4rem;
+    font-size: 2rem;
     
 }
 .hideDialog #spanIconHide:hover{
@@ -427,7 +427,9 @@ button{
     color: #fff;
     background: #007bff;
 }
-
+.fa-remove {
+    font-size: 10px;
+}
 .start_btn,
 .info_box,
 .quiz_box,

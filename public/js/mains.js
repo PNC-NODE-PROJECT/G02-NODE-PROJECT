@@ -23,7 +23,7 @@ function signUp(e) {
         document.querySelector(".Correct").style.display = "block";
         setTimeout(function(){
           window.location.reload(1);
-      },2000);
+      },1070);
     }
   }).catch((error)=> {
     console.log(error)
