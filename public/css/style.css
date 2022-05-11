@@ -100,6 +100,9 @@ body{
     text-align: center;
     border-radius: 10px;
 }
+.card-item:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
 .btn-ToQuiz, .btn-ToCreat{
     font-size: large;
     padding: 10px 0;
@@ -818,8 +821,6 @@ footer button.show{
 .contianerFormLogin{
     width: 100%;
     place-items: center;
-    background: #343a4059;
-  
 } 
 
 ::selection{
@@ -832,8 +833,8 @@ footer button.show{
   width: 30%;
   background-color: #155724;
   background: #fff;
-  padding: 30px;
-  border-radius: 5px;
+  padding: 20px;
+  border-radius: 9px;
   box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
 }
 .wrapper .title-text{
