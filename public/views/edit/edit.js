@@ -140,7 +140,7 @@ function refreshDOM(displayData){
         let dom_onHideAndShow=document.createElement("div");
         dom_onHideAndShow.className = "clickDesplay";
         let btnClick = document.createElement("i")
-        btnClick.className = "fas fa-chevron-circle-up"
+        btnClick.className = "fa fa-caret-up"
         dom_onHideAndShow.appendChild(btnClick)
         ///appendquestion to dom
         questionAndAnswersDom.appendChild(questionDOM)
@@ -160,13 +160,11 @@ function displayCorrectAnswerIdDOM(option){
         let icon = document.createElement("i")
         if(item.className=="option correct"){
             iconTage.className ="icon tick"
-            icon.className = "fas fa-check"
+            icon.className = "fa fa-check"
             iconTage.appendChild(icon)
             
         }else{
             item.className="option incorrect"
-            // iconTage.className ="icon cross"
-            // icon.className = "fas fa-times"
         }
         if(!item.children[1]){
             iconTage.appendChild(icon)
@@ -341,13 +339,13 @@ function postTypeofQuestion(typeOfAnswers){
 // TODO: event button
 
 DOMBODY.addEventListener("click", (e)=>{
-    if(e.target.className == "fas fa-chevron-circle-down"){
+    if(e.target.className == "fa fa-caret-down"){
         hide(e.target.parentElement.parentElement.children[1])
-        e.target.className = "fas fa-chevron-circle-up"
-    }else if(e.target.className == "fas fa-chevron-circle-up"){
+        e.target.className = "fa fa-caret-up"
+    }else if(e.target.className == "fa fa-caret-up"){
         show(e.target.parentElement.parentElement.children[1])
         displayCorrectAnswerIdDOM(e.target.parentElement.parentElement.children[1])
-        e.target.className ="fas fa-chevron-circle-down"
+        e.target.className ="fa fa-caret-down"
     }if(e.target.id == "choseTypeAnswers"){
         displayTypeanswers(e.target.value) /// when click one select type of answer
     }if(e.target.className == "addoption"){

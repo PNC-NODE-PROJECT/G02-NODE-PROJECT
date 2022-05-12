@@ -144,8 +144,8 @@ function showQuetions(index){
     }
 }
 
-let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
-let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
+let tickIconTag = '<div class="icon tick"><i class="fa fa-check"></i></div>';
+let crossIconTag = '<div class="icon cross"><i class="fa fa-close"></i></div>';
 /// when user click on answers
 function optionSelected(answer){
     clickAnswers ++
