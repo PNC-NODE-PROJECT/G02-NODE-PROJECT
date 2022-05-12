@@ -804,7 +804,7 @@ footer button.show{
 
 
 @media (max-width:750px){
-    .card{
+    .cardapp{
         flex-wrap: wrap;
     }
     .setList{
