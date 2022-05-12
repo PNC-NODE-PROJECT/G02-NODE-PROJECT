@@ -53,10 +53,11 @@ function login(){
       }
   })   
 }
-
+// main button get name from html 
+let uemail = document.querySelector("#loginemail");
+let upassword = document.querySelector("#loginpasword");
 
 // check if user login already
-
 function userHaslogined() {
   if(JSON.parse(localStorage.getItem("USER_LOGIN"))){
     let userInfor=JSON.parse(localStorage.getItem("USER_LOGIN"))
@@ -74,16 +75,6 @@ function userHaslogined() {
   }
 }
 userHaslogined()
-
-
-// main button get name from html 
-let uemail = document.querySelector("#loginemail");
-let upassword = document.querySelector("#loginpasword");
-
-// //-----------------------function add questions-----------------------
-
-
-// adduser.addEventListener("click", addData);
 
 //------------------verirable display login and sign up---------------
 const loginText = document.querySelector(".title-text .login");
