@@ -5,8 +5,8 @@ let firstName = document.querySelector("#firstname");
 let lastName = document.querySelector("#lastname");
 let emailAddress = document.querySelector("#email");
 let pass = document.querySelector("#signinpassword");
-
 let DomOfQuizses = document.querySelector(".card-group")
+
 let btnUser = document.querySelector("#btnsignin");
 btnUser.addEventListener("click", signUp)
 //----------------function sign up-------------------------
@@ -148,7 +148,7 @@ function refreshDOMToViewTopic(quizses){
   while(DomOfQuizses.firstChild){DomOfQuizses.removeChild(DomOfQuizses.lastChild)}
   quizses.forEach(element => {
     if(element.title!="..."){
-      let headBody = '<div class="card-body m-2"><div class="card-title mt-4"><h5>'+ element.title +'</h5></div>'
+      let headBody = '<div class="card-body m-2"><div class="remove_quiz" id="'+ element._id + '"><i class="fa fa-minus"></i></div><div class="card-title mt-4"><h5>'+ element.title +'</h5></div>'
       let partBody = '<div class="btngroup" id="'+ element._id +'"> <a href="views/play/play.html" class="btn btn-primary mr-2">Play Quiz</a> <a href="views/edit/edit.html" class="btn btn-primary ml-2">Edit Quiz</a></div>'
       let footBody = "</div"
       DomOfQuizses.insertAdjacentHTML("beforeend", headBody+partBody+footBody)
@@ -160,8 +160,6 @@ function refreshDOMToViewTopic(quizses){
 
 // TODO: request datas
 function getInforOfUser(userpassword){
-
-  
   axios.get("/users/logined/" + userpassword).then((respone)=>{
     let userInfor = respone.data
     let inFormationuser = []
@@ -182,10 +180,15 @@ function requestQuizsesFromServer(){
   }).catch((error)=>console.log(error))
 }
 requestQuizsesFromServer()
-
+// delete quiz 
+function deleteQuiz(Id_quiz){
+  axios.delete("/quizses/delete/" + Id_quiz)
+  .catch((error)=>{console.log(error)})
+  requestQuizsesFromServer()
+}
 /// Dom of button
 document.body.addEventListener("click", (e)=>{
-
+  
   if(e.target.textContent == "Play Quiz"){
     localStorage.setItem("QUIZ_ID"+JSON.parse(localStorage.getItem("USER_ID")), JSON.stringify(e.target.parentElement.id))
   }if(e.target.textContent == "Edit Quiz" && e.target.className=="btn btn-primary ml-2"){
@@ -197,6 +200,8 @@ document.body.addEventListener("click", (e)=>{
     .catch((error)=>{console.log("My post is error at", error)})
     userCreatQuiz()
     
+  }if(e.target.className=="fa fa-minus"){
+    deleteQuiz(e.target.parentElement.id)
   }else if(e.target.className =="fa fa-user-circle-o"){
     localStorage.removeItem("USER_LOGIN");
     userHaslogined()

@@ -42,6 +42,20 @@ router.put('/update/:id', (req, res) => {
     })
 })
 
+// delete one quiz
+router.delete('/delete/:quiz_id', (req, res) => {
+    exportModel.QuizModel.deleteOne({ _id: req.params.quiz_id})
+    .then((result) => {
+        res.send("Question delete successfully");
+    })
+    .catch((error) => {
+        res.send(error)
+    })
+})
+
+
+
+
 // TODO: export router
 
 module.exports = router
