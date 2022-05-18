@@ -7,14 +7,13 @@ const exportModel = require('../models/user_model')
 router.get('/get', (req, res) => {
     exportModel.UserModel.find()
     .then((result)=>{
-        console.log(result) ;
         res.send(result)})
 })
 
 router.get("/logined/:userpassword", (req, res)=>{
     console.log("my pass", req.params.userpassword);
     exportModel.UserModel.find({password:req.params.userpassword})
-    .then((result)=>{ console.log(result); res.send(result)})
+    .then((result)=>{res.send(result)})
 })
 
 

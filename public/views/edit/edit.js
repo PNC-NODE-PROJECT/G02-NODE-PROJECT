@@ -80,7 +80,7 @@ function UpdateQuizTitle(title){
 function requestData(){
     let id = JSON.parse(localStorage.getItem("EDIT_ID"+ JSON.parse(localStorage.getItem("USER_ID"))))
     axios.get("/questions/question/"+id)
-    .then((result)=>{refreshDOM(result.data); console.log("my data in", result.data);})
+    .then((result)=>{refreshDOM(result.data);})
     .catch((error)=>{console.log("You are error at", error)})
 }
 

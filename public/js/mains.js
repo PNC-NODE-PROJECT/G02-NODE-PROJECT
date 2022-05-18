@@ -26,7 +26,7 @@ function signUp(e) {
       },1070);
     }
   }).catch((error)=> {
-    console.log(error)
+    console.log("create user have some mistack")
   })
 }
 
@@ -184,7 +184,7 @@ requestQuizsesFromServer()
 function deleteQuiz(Id_quiz){
   console.log("id quiz to delete is ", Id_quiz);
   axios.delete("/quizses/delete/" + Id_quiz)
-  .catch((error)=>{console.log(error)})
+  .catch((error)=>{console.log('erro with axios delete')})
   requestQuizsesFromServer()
 }
 /// Dom of button
