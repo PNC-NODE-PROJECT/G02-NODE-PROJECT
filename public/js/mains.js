@@ -182,6 +182,7 @@ function requestQuizsesFromServer(){
 requestQuizsesFromServer()
 // delete quiz 
 function deleteQuiz(Id_quiz){
+  console.log("id quiz to delete is ", Id_quiz);
   axios.delete("/quizses/delete/" + Id_quiz)
   .catch((error)=>{console.log(error)})
   requestQuizsesFromServer()
