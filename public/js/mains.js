@@ -180,13 +180,7 @@ function requestQuizsesFromServer(){
   }).catch((error)=>console.log(error))
 }
 requestQuizsesFromServer()
-// delete quiz 
-function deleteQuiz(Id_quiz){
-  console.log("id quiz to delete is ", Id_quiz);
-  axios.delete("/quizses/delete/" + Id_quiz)
-  // .catch((error)=>{console.log('erro with axios delete')})
-  requestQuizsesFromServer()
-}
+
 /// Dom of button
 document.body.addEventListener("click", (e)=>{
   
@@ -202,7 +196,8 @@ document.body.addEventListener("click", (e)=>{
     userCreatQuiz()
     
   }if(e.target.className=="fa fa-minus"){
-    deleteQuiz(e.target.parentElement.id)
+    axios.delete("/quizses/delete/" + e.target.parentElement.id).catch(()=>{console.log("Error with axios request delete");})
+    requestQuizsesFromServer()
   }else if(e.target.className =="fa fa-user-circle-o"){
     localStorage.removeItem("USER_LOGIN");
     userHaslogined()
