@@ -197,6 +197,7 @@ document.body.addEventListener("click", (e)=>{
     
   }if(e.target.className=="fa fa-minus"){
     axios.delete("/quizses/delete/" + e.target.parentElement.id).catch(()=>{console.log("Error with axios request delete");})
+    axios.delete("/questions/quizDelete/"+e.target.parentElement.id).catch(()=>{console.log("error delete questions of quiz");})
     requestQuizsesFromServer()
   }else if(e.target.className =="fa fa-user-circle-o"){
     localStorage.removeItem("USER_LOGIN");

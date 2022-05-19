@@ -46,6 +46,17 @@ router.delete('/delete/:id', (req, res) => {
     })
 })
 
+// delete question in quiz
+router.delete('/quizDelete/:quiz_Id', (req, res) => {
+    exportModel.QuestionModel.deleteMany({quizId:req.params.quiz_Id})
+    .then((result) => {
+        res.send("Ok quiz deleted");
+    })
+    .catch((error) => {
+        res.send(error)
+    })
+})
+
 // update one quiz question
 router.put('/update/:id', (req, res) => {
     exportModel.QuestionModel.updateMany({_id : req.params.id}, req.body)
